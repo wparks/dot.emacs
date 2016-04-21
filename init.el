@@ -16,8 +16,20 @@
 (defvaralias 'cperl-indent-level 'tab-width)
 
 ;; Whitespace
-;; Make whitespace-mode use just basic coloring
-(setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+;; lines lines-tail newline trailing space-before-tab space-afte-tab empty
+;; indentation-space indentation indentation-tab tabs spaces
+(setq whitespace-style
+      '(
+        face
+        trailing
+        spaces
+        tabs
+        empty
+        newline
+        space-mark
+        tab-mark
+        newline-mark
+        ))
 (setq whitespace-display-mappings
       ;; all numbers are Unicode codepoint in decimal. try (insert-char 182) to see it
       '(
@@ -25,8 +37,40 @@
         (newline-mark 10 [182 10]) ;; 10 LINE FEED
         ;;(tab-mark 9 [9655 9] [92 9]) ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE
         (tab-mark 9 [8677 9] [92 9]) ;; 9 TAB, 8677 RIGHTWARDS ARROW TO BAR
-        )
-      )
+        ))
+(whitespace-mode t)
+(defvar mybgcolor "#181a26") ;; deeper-blue theme background
+(custom-set-faces
+ '(whitespace-trailing ((t (:underline t :foreground "DeepPink"))))
+ '(whitespace-tab ((t (:underline t :foreground "LightSkyBlue"))))
+ '(whitespace-space ((t (:bold t :foreground "#181a26" :background "#181a26"))))
+ '(whitespace-newline ((t (:bold t :foreground "#181a26" :background "#181a26"))))
+ '(whitespace-empty ((t (:background "#181a26"))))
+ '(whitespace-indentation ((t (:foreground "firebrick" :background "beige"))))
+ )
+;; (set-face-attribute 'whitespace-trailing nil
+;;                     :background mybgcolor
+;;                     :foreground "DeepPink"
+;;                     :underline t
+;;                     )
+;; (set-face-attribute 'whitespace-tab nil
+;;                     :background mybgcolor
+;;                     :foreground "LightSkyBlue"
+;;                     :underline t
+;;                     )
+;; (set-face-attribute 'whitespace-space nil
+;;                     :background mybgcolor
+;;                     :foreground mybgcolor ;;"GreenYellow"
+;;                     :weight 'bold
+;;                     )
+;; (set-face-attribute 'whitespace-newline nil
+;;                     :background mybgcolor
+;;                     :foreground mybgcolor ;;"GreenYellow"
+;;                     :weight 'bold
+;;                     )
+;; (set-face-attribute 'whitespace-empty nil
+;;                     :background mybgcolor
+;;                     )
 
 ;; Setup backup files into a separate directory
 (setq
