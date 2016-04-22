@@ -51,29 +51,6 @@
  '(whitespace-empty ((t (:background "#181a26"))))
  '(whitespace-indentation ((t (:foreground "firebrick" :background "beige"))))
  )
-;; (set-face-attribute 'whitespace-trailing nil
-;;                     :background mybgcolor
-;;                     :foreground "DeepPink"
-;;                     :underline t
-;;                     )
-;; (set-face-attribute 'whitespace-tab nil
-;;                     :background mybgcolor
-;;                     :foreground "LightSkyBlue"
-;;                     :underline t
-;;                     )
-;; (set-face-attribute 'whitespace-space nil
-;;                     :background mybgcolor
-;;                     :foreground mybgcolor ;;"GreenYellow"
-;;                     :weight 'bold
-;;                     )
-;; (set-face-attribute 'whitespace-newline nil
-;;                     :background mybgcolor
-;;                     :foreground mybgcolor ;;"GreenYellow"
-;;                     :weight 'bold
-;;                     )
-;; (set-face-attribute 'whitespace-empty nil
-;;                     :background mybgcolor
-;;                     )
 
 ;; Setup backup files into a separate directory
 (setq
