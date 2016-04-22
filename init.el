@@ -20,24 +20,24 @@
 ;; indentation-space indentation indentation-tab tabs spaces
 (setq whitespace-style
       '(
-	face
-	trailing
-	spaces
-	tabs
-	empty
-	newline
-	space-mark
-	tab-mark
-	newline-mark
-	))
+        face
+        trailing
+        spaces
+        tabs
+        empty
+        newline
+        space-mark
+        tab-mark
+        newline-mark
+        ))
 (setq whitespace-display-mappings
       ;; all numbers are Unicode codepoint in decimal. try (insert-char 182) to see it
       '(
-	(space-mark 32 [183] [46]) ;; 32 SPACE, 183 MIDDLE DOT, 46 FULL STOP
-	(newline-mark 10 [182 10]) ;; 10 LINE FEED
-	;;(tab-mark 9 [9655 9] [92 9]) ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE
-	(tab-mark 9 [8677 9] [92 9]) ;; 9 TAB, 8677 RIGHTWARDS ARROW TO BAR
-	))
+        (space-mark 32 [183] [46]) ;; 32 SPACE, 183 MIDDLE DOT, 46 FULL STOP
+        (newline-mark 10 [182 10]) ;; 10 LINE FEED
+        ;;(tab-mark 9 [9655 9] [92 9]) ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE
+        (tab-mark 9 [8677 9] [92 9]) ;; 9 TAB, 8677 RIGHTWARDS ARROW TO BAR
+        ))
 (if (>= emacs-major-version 23)
     (whitespace-mode t)
   (whitespace-global-mode t)
@@ -105,16 +105,16 @@
 ;; Load default theme
 (if (>= emacs-major-version 23)
     (add-hook 'after-init-hook
-	      (lambda()
-		;;(load-theme 'dark-mint)
-		;;(load-theme 'kooten t)
-		;;(load-theme 'zenbun t)
-		;;(load-theme 'solarized-dark)
-		;;(load-theme 'monokai t)
-		;;(load-theme 'cyberpunk t)
-		;;(load-theme 'ample t)
-		(load-theme 'deeper-blue)
-		;;(load-theme 'tango-dark)
-		)
-	      )
+              (lambda()
+                ;;(load-theme 'dark-mint)
+                ;;(load-theme 'kooten t)
+                ;;(load-theme 'zenbun t)
+                ;;(load-theme 'solarized-dark)
+                ;;(load-theme 'monokai t)
+                ;;(load-theme 'cyberpunk t)
+                ;;(load-theme 'ample t)
+                (load-theme 'deeper-blue)
+                ;;(load-theme 'tango-dark)
+                )
+              )
   )
