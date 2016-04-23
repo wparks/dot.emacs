@@ -38,9 +38,10 @@
         ;;(tab-mark 9 [9655 9] [92 9]) ;; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE
         (tab-mark 9 [8677 9] [92 9]) ;; 9 TAB, 8677 RIGHTWARDS ARROW TO BAR
         ))
+
 (if (>= emacs-major-version 23)
-    (whitespace-mode t)
-  (whitespace-global-mode t)
+    (add-hook 'after-change-major-mode-hook 'whitespace-mode)
+  (add-hook 'after-change-major-mode-hook 'whitespace-global-mode)
   )
 (defvar mybgcolor "#181a26") ;; deeper-blue theme background
 (custom-set-faces
