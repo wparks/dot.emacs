@@ -1,7 +1,3 @@
-;; Early init
-(unless (featurep 'early-init)
-  (load (expand-file-name "early-init.el" user-emacs-directory)))
-
 ;; Package setup
 (defvar package-archives)
 (setq package-archives
