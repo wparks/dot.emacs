@@ -29,7 +29,7 @@
   (tool-bar-mode -1)
   )
 
-;; Editor Backups and Autosaves
+;; Editor backups and autosaves
 (let ((backup-dir (expand-file-name "tmp/backups" user-emacs-directory))
       (auto-saves-dir (expand-file-name "tmp/auto-saves" user-emacs-directory)))
   (dolist (dir (list backup-dir auto-saves-dir))
@@ -77,7 +77,7 @@
 ;  (load-theme 'omtose-darker t)
 ;  )
 
-;; Line Numbers
+;; Line numbers
 (use-package display-line-numbers
   :defer t
   :hook (prog-mode . display-line-numbers-mode)
@@ -122,6 +122,8 @@
 ;  (highlight-indent-guides-method 'bitmap)
 ;  )
 
+;; TODO: Company mode
+
 ;; Programming modes
 (use-package prog-mode
   :defer t
@@ -144,7 +146,7 @@
   ;:hook (prog-mode . flycheck-mode)
   )
 
-;; Emacs Lisp Mode
+;; Emacs Lisp mode
 (use-package elisp-mode
   :defer t
   :mode ("\\.el\\'" . 'emacs-lisp-mode)
@@ -153,7 +155,7 @@
   :hook (emacs-lisp-mode . eldoc-mode)
   )
 
-;; Rust Mode (Rustic)
+;; Rust mode (Rustic)
 (use-package rustic
   :ensure t
   :requires (flycheck lsp-mode)
@@ -167,12 +169,12 @@
   (rustic-lsp-server 'rust-analyzer)
   )
 
-;; TODO: C/C++ Mode
-;; TODO: Python Mode
-;; TODO: Json Mode
-;; TODO: Yaml Mode
-;; TODO: Golang Mode
-;; TODO: Markdown Mode
+;; TODO: C/C++ mode
+;; TODO: Python mode
+;; TODO: Json mode
+;; TODO: Yaml mode
+;; TODO: Golang mode
+;; TODO: Markdown mode
 
 (provide 'init)
 ;;; init.el ends here
