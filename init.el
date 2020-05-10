@@ -143,7 +143,7 @@
 ;  )
 
 ;; TODO: C/C++ Mode
-;; TODO: Python Moden
+;; TODO: Python Mode
 ;; TODO: Json Mode
 ;; TODO: Yaml Mode
 ;; TODO: Golang Mode
