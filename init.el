@@ -60,18 +60,19 @@
 
 ;; Theme
 (use-package spacemacs-theme
-  :defer t
-  :init
+  :ensure t
+  :no-require t
+  :config
   (load-theme 'spacemacs-dark t)
   )
 ;(use-package monokai-theme
 ;  :defer t
-;  :init
+;  :config
 ;  (load-theme 'monokai t)
 ;  )
 ;(use-package omtose-phellack-theme
 ;  :defer t
-;  :init
+;  :config
 ;  (load-theme 'omtose-darker t)
 ;  )
 
@@ -126,6 +127,22 @@
   :hook (prog-mode . show-paren-mode)
   )
 
+;; LSP
+(use-package lsp-mode
+  :defer t
+  :commands lsp
+  ;:hook (prog-mode . lsp)
+  :custom
+  (lsp-prefer-flymake nil)
+  (lsp-enable-snippet nil) ;; enable when we use yasnippet
+  )
+
+;; Flycheck
+(use-package flycheck
+  :ensure t
+  ;:hook (prog-mode . flycheck-mode)
+  )
+
 ;; Emacs Lisp Mode
 (use-package elisp-mode
   :defer t
@@ -136,11 +153,18 @@
   )
 
 ;; Rust Mode (Rustic)
-;(use-package rustic
-;  :ensure t
-;  :custom
-;  (rustic-lsp-server 'rust-analyzer)
-;  )
+(use-package rustic
+  :ensure t
+  :requires (flycheck lsp-mode)
+  :commands (cargo-minor-mode)
+  :mode ("\\.rs" . rustic-mode)
+  :hook
+  (rustic-mode . flycheck-mode)
+  :config
+  ;(setq lsp-rust-analyzer-server-command '("~/.cargo/bin/rust-analyzer"))
+  :custom
+  (rustic-lsp-server 'rust-analyzer)
+  )
 
 ;; TODO: C/C++ Mode
 ;; TODO: Python Mode

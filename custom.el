@@ -24,9 +24,9 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(highlight-indent-guides xterm-color rustic use-package spacemacs-theme omtose-phellack-theme monokai-theme color-theme-modern))
+   '(lsp-mode flycheck highlight-indent-guides xterm-color rustic use-package spacemacs-theme omtose-phellack-theme monokai-theme color-theme-modern))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
- '(rustic-lsp-server 'rust-analyzer t)
+ '(rustic-lsp-server 'rust-analyzer)
  '(whitespace-display-mappings
    '((space-mark 32
 		 [183]
