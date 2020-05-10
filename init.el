@@ -5,7 +5,6 @@
 (setq package-enable-at-startup nil)
 (setq package-archives
       '(
-        ;("melpa-stable" . "https://stable.melpa.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
         ("gnu" . "https://elpa.gnu.org/packages/")
         )
@@ -15,11 +14,7 @@
   (package-refresh-contents)
   (package-install 'use-package)
   )
-;(eval-when-compile
-  (require 'use-package)
-  ;(setq use-package-always-ensure t)
-  ;(setq use-package-always-defer t)
-  ;)
+(require 'use-package)
 
 ;; Customize system
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -61,6 +56,7 @@
  create-lockfiles nil ;; Get rid of creating .#* files in same directory
  )
 (setq-default indent-tab-mode nil)
+(desktop-save-mode 1)
 
 ;; Theme
 (use-package spacemacs-theme
@@ -68,16 +64,16 @@
   :init
   (load-theme 'spacemacs-dark t)
   )
-(use-package monokai-theme
-  :defer t
-  :init
+;(use-package monokai-theme
+;  :defer t
+;  :init
 ;  (load-theme 'monokai t)
-  )
-(use-package omtose-phellack-theme
-  :defer t
-  :init
+;  )
+;(use-package omtose-phellack-theme
+;  :defer t
+;  :init
 ;  (load-theme 'omtose-darker t)
-  )
+;  )
 
 ;; Line Numbers
 (use-package display-line-numbers
@@ -130,7 +126,7 @@
   :hook (prog-mode . show-paren-mode)
   )
 
-;; Lisp Mode
+;; Emacs Lisp Mode
 (use-package elisp-mode
   :defer t
   :mode ("\\.el\\'" . 'emacs-lisp-mode)
