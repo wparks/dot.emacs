@@ -124,6 +124,8 @@
 
 ;; TODO: Company mode
 
+;; TODO: Org mode
+
 ;; Programming modes
 (use-package prog-mode
   :defer t
