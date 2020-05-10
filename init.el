@@ -57,6 +57,7 @@
  )
 (setq-default indent-tab-mode nil)
 (desktop-save-mode 1)
+(global-hl-line-mode t)
 
 ;; Theme
 (use-package spacemacs-theme
