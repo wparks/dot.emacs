@@ -122,9 +122,42 @@
 ;  (highlight-indent-guides-method 'bitmap)
 ;  )
 
+;; TODO: IDO
+;(use-package ido-completing-read+
+;  :ensure t
+;  :config
+;  ;; This enables ido in all contexts where it could be useful, not just
+;  ;; for selecting buffer and file names
+;  (ido-mode t)
+;  (ido-everywhere t)
+;  ;; This allows partial matches, e.g. "uzh" will match "Ustad Zakir Hussain"
+;  (setq ido-enable-flex-matching t)
+;  (setq ido-use-filename-at-point nil)
+;  ;; Includes buffer names of recently opened files, even if they're not open now.
+;  (setq ido-use-virtual-buffers t)
+;  :diminish nil
+;)
+
 ;; TODO: Company mode
+;(use-package company
+;  ;; Navigate in completion minibuffer with `C-n` and `C-p`.
+;  :bind (:map company-active-map
+;         ("C-n" . company-select-next)
+;         ("C-p" . company-select-previous))
+;  :config
+;  (setq company-idle-delay 0.3) ;; Provide instant autocompletion.
+;  (global-company-mode t) ;; Use company mode everywhere.
+;  )
 
 ;; TODO: Org mode
+;(use-package org
+;  )
+
+;; TODO: Magit
+;(use-package magit
+;  :ensure t
+;  :bind ("C-x g" . magit-status)
+;  )
 
 ;; Programming modes
 (use-package prog-mode
