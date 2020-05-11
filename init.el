@@ -55,8 +55,10 @@
  visible-bell t ;; No noise pls
  create-lockfiles nil ;; Get rid of creating .#* files in same directory
  )
-(setq-default indent-tab-mode nil)
-(setq-default tab-width 4)
+(setq-default
+ indent-tab-mode nil
+ tab-width 4
+ )
 (desktop-save-mode 1)
 (global-hl-line-mode t)
 
