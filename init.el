@@ -40,16 +40,13 @@
         auto-save-list-file-prefix (concat auto-saves-dir ".saves-")
         tramp-backup-directory-alist `((".*" . ,backup-dir))
         tramp-auto-save-directory auto-saves-dir))
+;; Basic settings and backups
 (setq
  backup-by-copying t ;; Don't delink hardlinks
  delete-old-versions t ;; Clean up the backups
  version-control t ;; Use version numbers on backups,
  kept-new-versions 5 ;; keep some new versions
  kept-old-versions 2 ;; and some old ones, too
- )
-
-;; Basic
-(setq
  column-number-mode t
  line-number-mode t
  visible-bell t ;; No noise pls
@@ -65,8 +62,8 @@
 ;; Theme
 (use-package spacemacs-theme
   :ensure t
-  :no-require t
-  :config
+  :defer t
+  :init
   (load-theme 'spacemacs-dark t)
   )
 ;(use-package monokai-theme
@@ -181,16 +178,17 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  ;:hook (prog-mode . flycheck-mode)
+  :defer t
+  :commands (flycheck-mode)
   )
 
 ;; Emacs Lisp mode
 (use-package elisp-mode
   :defer t
-  :mode ("\\.el\\'" . 'emacs-lisp-mode)
+  :mode ("\\.el\\'" . emacs-lisp-mode)
+  :hook (emacs-lisp-mode . eldoc-mode)
   :config
   (setq indent-tabs-mode nil)
-  :hook (emacs-lisp-mode . eldoc-mode)
   )
 
 ;; Rust mode (Rustic)
