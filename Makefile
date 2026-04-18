@@ -17,6 +17,10 @@ check: lint
 
 clean:
 	rm -f init.elc
+	rm -rf elpa/
+	rm -rf tree-sitter/
+	rm -rf tmp/
+	@echo "Cleaned. Restart Emacs to reinstall packages."
 
 # Install tree-sitter grammars (requires Emacs 29+ with tree-sitter).
 # Run once after initial setup to enable tree-sitter modes.
