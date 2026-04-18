@@ -14,10 +14,10 @@ Emacs 29+ with tree-sitter support. Native compilation recommended for performan
 
 ```sh
 brew tap d12frosted/emacs-plus
-brew install emacs-plus@30 --with-native-comp
+brew install emacs-plus@30
 ```
 
-This gives you native compilation, tree-sitter, and full GUI support.
+Native compilation and tree-sitter are included by default.
 
 **Alternatives:**
 | Option                                    | Native-comp | Tree-sitter | Notes                                                        |
