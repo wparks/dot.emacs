@@ -141,10 +141,88 @@
   (setq indent-tabs-mode nil)
   )
 
-;; TODO: Org mode
-;; TODO: Magit
+;; C/C++
+(if (my/treesit-available-p 'c)
+    (use-package c-ts-mode
+      :defer t
+      :config
+      (setq c-ts-mode-indent-offset 4))
+  (use-package cc-mode
+    :defer t
+    :config
+    (setq c-basic-offset 4)))
 
-;; TODO: Language modes — C/C++, Python, Swift, Go, Zig, JSON, YAML, Markdown
+;; Python
+(if (my/treesit-available-p 'python)
+    (use-package python
+      :defer t
+      :mode ("\\.py\\'" . python-ts-mode)
+      :config
+      (setq python-indent-offset 4))
+  (use-package python
+    :defer t
+    :mode ("\\.py\\'" . python-mode)
+    :config
+    (setq python-indent-offset 4)))
+
+;; Go — uses real tabs per community convention
+(if (my/treesit-available-p 'go)
+    (use-package go-ts-mode
+      :defer t
+      :mode "\\.go\\'"
+      :hook (go-ts-mode . (lambda () (setq indent-tabs-mode t)))
+      :config
+      (setq go-ts-mode-indent-offset 4))
+  (use-package go-mode
+    :ensure t
+    :defer t
+    :mode "\\.go\\'"
+    :hook (go-mode . (lambda () (setq indent-tabs-mode t)))))
+
+;; JSON
+(if (my/treesit-available-p 'json)
+    (use-package json-ts-mode
+      :defer t
+      :mode "\\.json\\'"
+      :config
+      (setq json-ts-mode-indent-offset 4))
+  (use-package js
+    :defer t
+    :mode ("\\.json\\'" . js-json-mode)
+    :config
+    (setq js-indent-level 4)))
+
+;; YAML
+(if (my/treesit-available-p 'yaml)
+    (use-package yaml-ts-mode
+      :defer t
+      :mode ("\\.ya?ml\\'"))
+  (use-package yaml-mode
+    :ensure t
+    :defer t
+    :mode ("\\.ya?ml\\'")))
+
+;; Swift
+(use-package swift-mode
+  :ensure t
+  :defer t
+  :mode "\\.swift\\'"
+  :config
+  (setq swift-mode:basic-offset 4))
+
+;; Zig
+(use-package zig-mode
+  :ensure t
+  :defer t
+  :mode "\\.zig\\'"
+  :config
+  (setq zig-indent-offset 4))
+
+;; Markdown
+(use-package markdown-mode
+  :ensure t
+  :defer t
+  :mode ("\\.md\\'" "\\.markdown\\'"))
 
 (provide 'init)
 ;;; init.el ends here
