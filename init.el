@@ -108,6 +108,30 @@
   :hook (prog-mode . show-paren-mode)
   )
 
+;; Tree-sitter support (Emacs 29+)
+(defun my/treesit-available-p (lang)
+  "Check if tree-sitter is usable for LANG."
+  (and (fboundp 'treesit-available-p)
+       (treesit-available-p)
+       (treesit-language-available-p lang)))
+
+(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+  (setq treesit-language-source-alist
+        '((c "https://github.com/tree-sitter/tree-sitter-c")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+          (python "https://github.com/tree-sitter/tree-sitter-python")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")))
+
+  (defun my/install-treesit-grammars ()
+    "Install all tree-sitter grammars from treesit-language-source-alist."
+    (interactive)
+    (dolist (grammar treesit-language-source-alist)
+      (unless (treesit-language-available-p (car grammar))
+        (treesit-install-language-grammar (car grammar))))))
+
 ;; Emacs Lisp mode
 (use-package elisp-mode
   :defer t
