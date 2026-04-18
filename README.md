@@ -91,6 +91,16 @@ emacs
 
 First launch will download and compile packages — subsequent launches are fast.
 
+### Tree-sitter grammars (optional, recommended)
+
+Tree-sitter provides better syntax highlighting and indentation. Install grammars after first setup:
+
+```sh
+make grammars
+```
+
+Without grammars, all language modes fall back to traditional regex-based highlighting automatically.
+
 ### Dotfiles setup (portable across machines)
 
 This repo can live inside a dotfiles directory and be symlinked:
@@ -112,7 +122,8 @@ For more complex dotfiles management, [chezmoi](https://www.chezmoi.io/) is a cr
 After setup, confirm your Emacs has the features you want:
 
 ```sh
-make check   # byte-compile lint
+make check     # byte-compile lint
+make grammars  # install tree-sitter grammars
 emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-available-p) (treesit-available-p))'
 ```
 
@@ -129,9 +140,8 @@ emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-av
 
 ## Current Language Support
 
-Configured: Emacs Lisp
-
-Planned: C/C++, Python, Swift, Go, Zig, JSON, YAML, Markdown
+Configured with tree-sitter (when grammars installed) and traditional fallbacks:
+C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp
 
 ## License
 
