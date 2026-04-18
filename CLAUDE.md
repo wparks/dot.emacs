@@ -1,60 +1,59 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with this repository.
 
 ## Repository Overview
 
-This is a personal Emacs configuration stored in ~/.emacs.d/. The configuration uses `use-package` for package management and follows a modular approach with separate files for initialization and customization.
+Personal Emacs configuration (~/.emacs.d/). Minimal, portable, built-in-first.
+See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy and direction.
 
 ## Architecture
 
-- **init.el**: Main configuration file containing package setup, UI configuration, editor settings, and mode configurations
-- **custom.el**: Emacs-generated customization file for user preferences and package settings
-- **elpa/**: Package directory managed by Emacs package system (MELPA and GNU ELPA)
-- **tmp/**: Directory for backups and auto-saves (created automatically)
+| File / Dir           | Purpose                                                  |
+| -------------------- | -------------------------------------------------------- |
+| `init.el`            | Main configuration: packages, UI, editor settings, modes |
+| `custom.el`          | Emacs-generated customization (do not hand-edit)         |
+| `docs/PRINCIPLES.md` | Design philosophy, language roadmap, portability goals   |
+| `Makefile`           | `make lint` byte-compiles, `make check` runs all checks  |
+| `elpa/`              | Installed packages (gitignored)                          |
+| `tmp/`               | Backups and auto-saves (gitignored)                      |
 
-## Key Configuration Structure
+## init.el Structure
 
-The init.el follows this pattern:
-1. Package system setup (MELPA/GNU repositories)
-2. use-package installation and setup
-3. Custom file loading
-4. Window system configuration (GUI-specific settings)
-5. Editor backup/autosave configuration
-6. Basic editor settings
-7. Theme and visual configuration
-8. Mode-specific configurations using use-package
+1. Package system setup (MELPA/GNU ELPA, use-package bootstrap)
+2. Custom file loading
+3. Window system config (GUI: no toolbar, no scrollbar, no splash)
+4. Backup/autosave system (tmp/ directory)
+5. Basic editor settings (4-space soft tabs, no real tabs, visible bell)
+6. Theme (spacemacs-dark)
+7. Mode configs via use-package
 
-## Package Management
+## Active Languages
 
-- Uses `use-package` for declarative package configuration
-- Packages are automatically installed from MELPA and GNU ELPA
-- Package configurations include defer loading, hooks, and custom settings
-- Custom settings are stored separately in custom.el
+Emacs Lisp (configured). Planned: C/C++, Python, Swift, Go, Zig, JSON, YAML, Markdown.
 
-## Current Configuration Features
+Rust was removed — not in active use.
 
-- Spacemacs dark theme
-- Line numbers for programming modes
-- Whitespace visualization with custom display mappings
-- LSP mode support (currently deferred)
-- Flycheck integration
-- Rustic mode for Rust development
-- Desktop session persistence
-- Comprehensive backup system in tmp/ directory
+## Key Design Constraints
 
-## TODO Items in Configuration
+- **Built-in first**: prefer Emacs built-in modes. External packages only when no viable alternative.
+- **No frameworks**: no Doom/Spacemacs overlays. Standard Emacs + use-package.
+- **Vanilla keybindings**: never remap core Emacs bindings.
+- **4-space soft tabs**: `indent-tabs-mode nil`, `tab-width 4` everywhere, all modes.
+- **Consistent cross-language**: all programming modes should have the same visual treatment.
+- **Tree-sitter modes preferred** (`*-ts-mode`) where available — Emacs 29+.
+- **Portable**: macOS, Linux, Windows. No hardcoded paths.
 
-The init.el contains several commented TODO sections for future implementation:
-- Indentation guides (highlight-indent-guides)
-- IDO completion system
-- Company mode for autocompletion
-- Org mode configuration
-- Magit for Git integration
-- Additional language modes (C/C++, Python, JSON, YAML, Go, Markdown)
+## Verification
+
+```sh
+make lint    # byte-compile init.el
+make check   # lint + paren check
+emacs --batch -l init.el   # test clean load
+```
 
 ## Emacs Usage
 
-To reload configuration: `M-x eval-buffer` in init.el or restart Emacs
-To customize settings: Use `M-x customize` (saves to custom.el)
-To install packages: Add use-package declaration to init.el and restart/reload
+- Reload config: `M-x eval-buffer` in init.el or restart Emacs
+- Customize settings: `M-x customize` (saves to custom.el)
+- Install packages: add `use-package` declaration with `:ensure t` to init.el

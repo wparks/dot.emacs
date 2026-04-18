@@ -52,7 +52,7 @@
  create-lockfiles nil ;; Get rid of creating .#* files in same directory
  )
 (setq-default
- indent-tab-mode nil
+ indent-tabs-mode nil
  tab-width 4
  )
 (desktop-save-mode 1)
@@ -65,17 +65,6 @@
   :init
   (load-theme 'spacemacs-dark t)
   )
-;(use-package monokai-theme
-;  :defer t
-;  :config
-;  (load-theme 'monokai t)
-;  )
-;(use-package omtose-phellack-theme
-;  :defer t
-;  :config
-;  (load-theme 'omtose-darker t)
-;  )
-
 ;; Line numbers
 (use-package display-line-numbers
   :defer t
@@ -113,72 +102,10 @@
      ))
   )
 
-;; TODO: Indentation
-;(use-package highlight-indent-guides
-;  :defer t
-;  :hook (prog-mode . highlight-indent-guides)
-;  :custom
-;  (highlight-indent-guides-method 'bitmap)
-;  )
-
-;; TODO: IDO
-;(use-package ido-completing-read+
-;  :ensure t
-;  :config
-;  ;; This enables ido in all contexts where it could be useful, not just
-;  ;; for selecting buffer and file names
-;  (ido-mode t)
-;  (ido-everywhere t)
-;  ;; This allows partial matches, e.g. "uzh" will match "Ustad Zakir Hussain"
-;  (setq ido-enable-flex-matching t)
-;  (setq ido-use-filename-at-point nil)
-;  ;; Includes buffer names of recently opened files, even if they're not open now.
-;  (setq ido-use-virtual-buffers t)
-;  :diminish nil
-;)
-
-;; TODO: Company mode
-;(use-package company
-;  ;; Navigate in completion minibuffer with `C-n` and `C-p`.
-;  :bind (:map company-active-map
-;         ("C-n" . company-select-next)
-;         ("C-p" . company-select-previous))
-;  :config
-;  (setq company-idle-delay 0.3) ;; Provide instant autocompletion.
-;  (global-company-mode t) ;; Use company mode everywhere.
-;  )
-
-;; TODO: Org mode
-;(use-package org
-;  )
-
-;; TODO: Magit
-;(use-package magit
-;  :ensure t
-;  :bind ("C-x g" . magit-status)
-;  )
-
 ;; Programming modes
 (use-package prog-mode
   :defer t
   :hook (prog-mode . show-paren-mode)
-  )
-
-;; LSP
-(use-package lsp-mode
-  :defer t
-  :commands lsp
-  ;:hook (prog-mode . lsp)
-  :custom
-  (lsp-prefer-flymake nil)
-  (lsp-enable-snippet nil) ;; enable when we use yasnippet
-  )
-
-;; Flycheck
-(use-package flycheck
-  :ensure t
-  :defer t
-  :commands (flycheck-mode)
   )
 
 ;; Emacs Lisp mode
@@ -190,26 +117,10 @@
   (setq indent-tabs-mode nil)
   )
 
-;; Rust mode (Rustic)
-(use-package rustic
-  :ensure t
-  :requires (flycheck lsp-mode)
-  :commands (cargo-minor-mode)
-  :mode ("\\.rs" . rustic-mode)
-  :hook
-  (rustic-mode . flycheck-mode)
-  :config
-  ;(setq lsp-rust-analyzer-server-command '("~/.cargo/bin/rust-analyzer"))
-  :custom
-  (rustic-lsp-server 'rust-analyzer)
-  )
+;; TODO: Org mode
+;; TODO: Magit
 
-;; TODO: C/C++ mode
-;; TODO: Python mode
-;; TODO: Json mode
-;; TODO: Yaml mode
-;; TODO: Golang mode
-;; TODO: Markdown mode
+;; TODO: Language modes — C/C++, Python, Swift, Go, Zig, JSON, YAML, Markdown
 
 (provide 'init)
 ;;; init.el ends here
