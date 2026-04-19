@@ -117,11 +117,11 @@ C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp
 
 ## Verification
 
+Run lint and mode/indentation tests in one shot:
+
 ```sh
 make verify
 ```
-
-Runs lint (`check`) and mode/indentation tests (`test`) in one shot.
 
 Individual targets:
 
