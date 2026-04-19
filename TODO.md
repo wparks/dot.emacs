@@ -26,7 +26,6 @@ Tracked work for this Emacs configuration.
 
 - [ ] magit — git integration
 - [ ] org-mode — basic org config
-- [ ] which-key — keybinding discovery
 - [ ] highlight-indent-guides — indentation visualization
 
 ## Infrastructure

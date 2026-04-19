@@ -61,7 +61,8 @@
 
 ;; Theme
 ;; modus-vivendi: built-in dark theme (Emacs 28+)
-(load-theme 'modus-vivendi t)
+(when (>= emacs-major-version 28)
+  (load-theme 'modus-vivendi t))
 ;; Line numbers
 (use-package display-line-numbers
   :hook (prog-mode . display-line-numbers-mode)
@@ -126,6 +127,12 @@
   (global-corfu-mode))
 
 (savehist-mode 1)
+
+;; Keybinding discovery (built-in Emacs 30+)
+(use-package which-key
+  :if (fboundp 'which-key-mode)
+  :init
+  (which-key-mode))
 
 ;; Programming modes
 (use-package prog-mode
