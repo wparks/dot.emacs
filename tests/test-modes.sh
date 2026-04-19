@@ -95,6 +95,37 @@ if [ "$elapsed" -gt 2000 ]; then
 fi
 
 echo ""
+
+# Feature activation tests
+echo "Feature tests..."
+
+check_feature() {
+    name="$1"
+    expr="$2"
+
+    result=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "(princ (if $expr \"yes\" \"no\"))" 2>/dev/null)
+
+    if [ "$result" = "yes" ]; then
+        printf "  PASS  %s\n" "$name"
+        PASS=$((PASS + 1))
+    else
+        printf "  FAIL  %s\n" "$name"
+        FAIL=$((FAIL + 1))
+    fi
+}
+
+check_feature "vertico-mode active"        "(bound-and-true-p vertico-mode)"
+check_feature "marginalia-mode active"     "(bound-and-true-p marginalia-mode)"
+check_feature "orderless in styles"        "(memq 'orderless completion-styles)"
+check_feature "savehist-mode active"       "(bound-and-true-p savehist-mode)"
+check_feature "show-paren-mode hook"       "(memq 'show-paren-mode prog-mode-hook)"
+check_feature "global-hl-line-mode"        "(bound-and-true-p global-hl-line-mode)"
+check_feature "indent-tabs-mode off"       "(not (default-value 'indent-tabs-mode))"
+check_feature "tab-width is 4"            "(= (default-value 'tab-width) 4)"
+check_feature "no lockfiles"              "(not create-lockfiles)"
+check_feature "backup-by-copying"         "backup-by-copying"
+
+echo ""
 echo "Results: $PASS passed, $FAIL failed"
 
 if [ "$FAIL" -gt 0 ]; then
