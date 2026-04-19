@@ -4,7 +4,7 @@ Tracked work for this Emacs configuration.
 
 ## Active
 
-- [ ] Investigate emacs-plus build failure on macOS Tahoe (Abort trap: 6 during pdmp — upstream issue, try `--HEAD` or check back periodically)
+- [ ] emacs-plus build failure on macOS Tahoe — pdumper aborts during `Waiting for git...` step. Tested: JIT vs AOT native-comp doesn't help, disabling system-appearance patch doesn't help. Root cause is likely Tahoe sandbox restricting subprocess spawning during pdump. Upstream Emacs issue. Using `emacs-app` cask as workaround.
 - [ ] Dotfiles repo restructure — move to `dotfiles/emacs.d/` with `setup.sh` + `setup.ps1`
 
 ## Language Support — Phase 2: Navigation
