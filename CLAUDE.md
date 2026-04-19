@@ -4,35 +4,40 @@ This file provides guidance to Claude Code when working with this repository.
 
 ## Repository Overview
 
-Personal Emacs configuration (~/.emacs.d/). Minimal, portable, built-in-first.
-See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy and direction.
+Personal dotfiles repo (`~/dotfiles/`). Minimal, portable, built-in-first.
+`~/.emacs.d` is a symlink to `emacs.d/` in this repo.
+
+See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy.
 See [TODO.md](TODO.md) for planned work.
 
 ## Architecture
 
-| File / Dir           | Purpose                                                  |
-| -------------------- | -------------------------------------------------------- |
-| `init.el`            | Main configuration: packages, UI, editor settings, modes |
-| `custom.el`          | Emacs-generated customization (do not hand-edit)         |
-| `docs/PRINCIPLES.md` | Design philosophy, language roadmap, portability goals   |
-| `TODO.md`            | Tracked work and future plans                            |
-| `Makefile`           | lint, check, test, discover, setup, grammars, clean      |
-| `tests/`             | Test scripts, discovery, and sample files                |
-| `elpa/`              | Installed packages (gitignored)                          |
-| `tree-sitter/`       | Compiled grammars (gitignored)                           |
-| `tmp/`               | Backups and auto-saves (gitignored)                      |
+| Path                   | Purpose                                                |
+| ---------------------- | ------------------------------------------------------ |
+| `emacs.d/init.el`      | Main Emacs configuration                               |
+| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)       |
+| `docs/PRINCIPLES.md`   | Design philosophy, language roadmap, portability goals |
+| `TODO.md`              | Tracked work and future plans                          |
+| `Makefile`             | lint, check, test, discover, setup, grammars, clean    |
+| `tests/emacs/`         | Emacs test scripts, discovery, sample files            |
+| `setup.sh`             | Symlink setup (macOS / Linux)                          |
+| `setup.ps1`            | Symlink setup (Windows)                                |
+| `emacs.d/elpa/`        | Installed packages (gitignored)                        |
+| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                         |
+| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                    |
 
 ## init.el Structure
 
 1. Package system setup (MELPA/GNU ELPA, use-package bootstrap)
 2. Custom file loading
-3. Window system config (GUI: no toolbar, no scrollbar, no splash)
+3. Window system config (GUI: no toolbar, no scrollbar, no splash, 120x50 default)
 4. Backup/autosave system (tmp/ directory)
 5. Basic editor settings (4-space soft tabs, no real tabs, visible bell)
 6. Theme (modus-vivendi, built-in)
 7. Whitespace visualization
-8. Tree-sitter support (helper, grammar sources, install command)
-9. Language modes with tree-sitter / traditional fallback
+8. Completion (vertico, orderless, marginalia, corfu, savehist)
+9. Tree-sitter support (helper, grammar sources, install command)
+10. Language modes with tree-sitter / traditional fallback
 
 ## Active Languages
 

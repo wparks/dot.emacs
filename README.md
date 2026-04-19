@@ -1,29 +1,53 @@
-# dot.emacs
+# dotfiles
 
-Personal Emacs configuration. Minimal, portable, built-in-first.
+Personal dotfiles. Minimal, portable, built-in-first.
+
+## Quick Start
+
+```sh
+git clone git@github.com:wparks/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./setup.sh          # creates ~/.emacs.d symlink
+emacs               # installs packages on first launch
+make grammars       # optional: tree-sitter grammars
+make test           # verify everything works
+```
+
+**Windows:**
+```powershell
+git clone git@github.com:wparks/dotfiles.git $env:USERPROFILE\dotfiles
+cd $env:USERPROFILE\dotfiles
+powershell -ExecutionPolicy Bypass -File setup.ps1
+```
+
+## What's Inside
+
+| Directory  | Config for                 |
+| ---------- | -------------------------- |
+| `emacs.d/` | Emacs (init.el, custom.el) |
+
+More configs (git, zsh, etc.) can be added alongside `emacs.d/`.
+
+## Emacs
 
 See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy.
 
-## Prerequisites
+### Installing Emacs
 
-Emacs 29+ with tree-sitter support. Native compilation recommended for performance.
-
-## Installing Emacs
-
-### macOS
+#### macOS
 
 ```sh
 brew install --cask emacs-app
 ```
 
-This provides Emacs 30.x with tree-sitter support. For native compilation, try `emacs-plus`:
+Emacs 30.x with tree-sitter. For native compilation, try `emacs-plus`:
 
 ```sh
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@30
 ```
 
-**Note:** emacs-plus may fail to build on the latest macOS (Tahoe). If it does, `emacs-app` works fine — native-comp is a performance optimization, not required.
+**Note:** emacs-plus may fail to build on the latest macOS (Tahoe). `emacs-app` works fine without native-comp.
 
 **Alternatives:**
 | Option                                    | Native-comp | Tree-sitter | Notes                                                        |
@@ -31,137 +55,54 @@ brew install emacs-plus@30
 | `brew install --cask emacs-app`           | No          | Yes         | Reliable, pre-built binary                                   |
 | `brew install emacs-plus@30`              | Yes         | Yes         | Best option when it builds; may fail on new macOS            |
 | `brew install emacs-mac` (railwaycat tap) | Varies      | Yes         | Mitsuharu Yamamoto's macOS-native port; good Mac integration |
-| emacsformacosx.com                        | No          | No          | Simple binary download; lacks modern features                |
 
-### Windows
+#### Windows
 
-**Option A: Official GNU builds** (simplest)
+Download from https://ftp.gnu.org/gnu/emacs/windows/ — Emacs 29+ builds include native compilation. Set `HOME` environment variable to your user directory. Requires Developer Mode for symlinks.
 
-Download from https://ftp.gnu.org/gnu/emacs/windows/ — Emacs 29+ builds include native compilation.
-
-Extract, add `bin/` to PATH, set `HOME` environment variable to your user directory.
-
-**Option B: MSYS2** (if you already use MSYS2)
+#### Linux
 
 ```sh
-pacman -S mingw-w64-x86_64-emacs
+emacs --version  # check if 29+
 ```
 
-Includes native-comp and tree-sitter.
+If older, build from source with `--with-native-compilation --with-tree-sitter`.
 
-**Notes:**
-- Set the `HOME` environment variable so Emacs finds `~/.emacs.d` at the expected location
-- Windows symlinks require Developer Mode enabled (Settings > For Developers > Developer Mode)
+### Language Support
 
-### Linux
-
-Check your distro's package version first:
-
-```sh
-emacs --version
-```
-
-If it reports 29+ you're likely fine. Verify native-comp and tree-sitter:
-
-```sh
-emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-available-p) (treesit-available-p))'
-```
-
-If your distro packages an older version, build from source:
-
-```sh
-git clone https://git.savannah.gnu.org/git/emacs.git
-cd emacs
-./autogen.sh
-./configure --with-native-compilation --with-tree-sitter
-make -j$(nproc)
-sudo make install
-```
-
-## Setup
-
-### Quick start (current machine)
-
-If this repo is already checked out as `~/.emacs.d/`:
-
-```sh
-emacs  # packages install automatically on first launch
-```
-
-### From scratch
-
-```sh
-git clone <repo-url> ~/.emacs.d
-make setup    # headless package install (or just launch emacs)
-make grammars # optional: install tree-sitter grammars
-make test     # verify everything works
-```
-
-### Tree-sitter grammars (optional, recommended)
-
-Tree-sitter provides better syntax highlighting and indentation. Install grammars after first setup:
-
-```sh
-make grammars
-```
-
-Without grammars, all language modes fall back to traditional regex-based highlighting automatically.
-
-### Dotfiles setup (portable across machines)
-
-This repo can live inside a dotfiles directory and be symlinked:
-
-**macOS / Linux:**
-```sh
-ln -sf ~/dotfiles/emacs.d ~/.emacs.d
-```
-
-**Windows (requires Developer Mode):**
-```cmd
-mklink /D %USERPROFILE%\.emacs.d %USERPROFILE%\dotfiles\emacs.d
-```
-
-For more complex dotfiles management, [chezmoi](https://www.chezmoi.io/) is a cross-platform alternative that works natively on all three platforms.
+Configured with tree-sitter (when grammars installed) and traditional fallbacks:
+C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp
 
 ## Verification
-
-After setup, confirm your Emacs has the features you want:
 
 ```sh
 make discover  # find all Emacs installations and their capabilities
 make check     # byte-compile lint
 make test      # verify mode activation and indentation
 make grammars  # install tree-sitter grammars
+make clean     # remove packages, grammars, caches for fresh start
 ```
 
-Tests default to `/Applications/Emacs.app` on macOS (matching Spotlight launches). To test against a different Emacs binary:
+Test against a specific Emacs binary:
 
 ```sh
-make test EMACS=/usr/bin/emacs          # system Emacs (if it exists)
-make test EMACS=/opt/homebrew/bin/emacs  # Homebrew CLI
-make test EMACS=/usr/local/bin/emacs     # custom build
+make test EMACS=/path/to/emacs
 ```
-
-This is useful for verifying graceful fallback on older Emacs versions or on other machines.
 
 ## Structure
 
-| File / Dir           | Purpose                                          |
-| -------------------- | ------------------------------------------------ |
-| `init.el`            | Main configuration                               |
-| `custom.el`          | Emacs-generated customization (do not hand-edit) |
-| `docs/PRINCIPLES.md` | Design philosophy and direction                  |
-| `TODO.md`            | Tracked work and future plans                    |
-| `Makefile`           | lint, check, test, setup, grammars, clean        |
-| `tests/`             | Test script and sample files for verification    |
-| `elpa/`              | Installed packages (gitignored)                  |
-| `tree-sitter/`       | Compiled grammars (gitignored)                   |
-| `tmp/`               | Backups and auto-saves (gitignored)              |
-
-## Current Language Support
-
-Configured with tree-sitter (when grammars installed) and traditional fallbacks:
-C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp
+| Path                   | Purpose                                          |
+| ---------------------- | ------------------------------------------------ |
+| `emacs.d/init.el`      | Main Emacs configuration                         |
+| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit) |
+| `docs/PRINCIPLES.md`   | Design philosophy and direction                  |
+| `tests/emacs/`         | Emacs test scripts and sample files              |
+| `setup.sh`             | Symlink setup (macOS / Linux)                    |
+| `setup.ps1`            | Symlink setup (Windows)                          |
+| `Makefile`             | lint, check, test, discover, setup, grammars     |
+| `TODO.md`              | Tracked work and future plans                    |
+| `emacs.d/elpa/`        | Installed packages (gitignored)                  |
+| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                   |
 
 ## License
 
