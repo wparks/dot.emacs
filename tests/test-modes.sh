@@ -76,8 +76,15 @@ start_ms=$(python3 -c 'import time; print(int(time.time()*1000))')
 end_ms=$(python3 -c 'import time; print(int(time.time()*1000))')
 elapsed=$((end_ms - start_ms))
 echo "  ${elapsed}ms"
-if [ "$elapsed" -gt 2000 ]; then
-    echo "  WARNING: startup exceeds 2s"
+if [ "$elapsed" -gt 1500 ]; then
+    printf "  FAIL  startup exceeds 1500ms hard limit\n"
+    FAIL=$((FAIL + 1))
+elif [ "$elapsed" -gt 1000 ]; then
+    printf "  NOTE  startup exceeds 1000ms target (still under 1500ms limit)\n"
+    PASS=$((PASS + 1))
+else
+    printf "  PASS  startup under 1000ms target\n"
+    PASS=$((PASS + 1))
 fi
 
 # --- Feature activation tests (single Emacs process) ---
