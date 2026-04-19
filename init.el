@@ -121,6 +121,15 @@
   :init
   (marginalia-mode))
 
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-auto t)
+  (corfu-auto-delay 0.3)
+  (corfu-auto-prefix 2)
+  :init
+  (global-corfu-mode))
+
 (savehist-mode 1)
 
 ;; Programming modes

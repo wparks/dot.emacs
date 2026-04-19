@@ -95,6 +95,7 @@ feature_results=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
 (dolist (spec '((\"vertico-mode active\" (bound-and-true-p vertico-mode))
                (\"marginalia-mode active\" (bound-and-true-p marginalia-mode))
                (\"orderless in styles\" (memq 'orderless completion-styles))
+               (\"corfu-mode active\" (bound-and-true-p global-corfu-mode))
                (\"savehist-mode active\" (bound-and-true-p savehist-mode))
                (\"show-paren-mode hook\" (memq 'show-paren-mode prog-mode-hook))
                (\"global-hl-line-mode\" (bound-and-true-p global-hl-line-mode))

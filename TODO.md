@@ -25,7 +25,7 @@ Tracked work for this Emacs configuration.
 
 ## Packages to Evaluate
 
-- [ ] corfu — in-buffer completion (replaces old Company stub)
+- [x] corfu — in-buffer completion (replaces old Company stub)
 - [ ] magit — git integration
 - [ ] org-mode — basic org config
 - [ ] which-key — keybinding discovery
