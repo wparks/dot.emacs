@@ -27,7 +27,7 @@ Tracked work for this Emacs configuration. Check items off as completed.
 
 ## Packages to Evaluate
 
-- [ ] vertico + orderless + marginalia — modern completion (replaces old IDO stub)
+- [x] vertico + orderless + marginalia — modern completion (replaces old IDO stub)
 - [ ] corfu — in-buffer completion (replaces old Company stub)
 - [ ] magit — git integration
 - [ ] org-mode — basic org config
