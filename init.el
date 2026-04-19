@@ -119,14 +119,16 @@
        (treesit-language-available-p lang)))
 
 (when (and (fboundp 'treesit-available-p) (treesit-available-p))
+  ;; Grammar sources pinned to ABI 14 compatible versions (Emacs 30.x).
+  ;; JSON works at latest. Others need pre-0.25 tree-sitter tags.
   (setq treesit-language-source-alist
-        '((c "https://github.com/tree-sitter/tree-sitter-c")
-          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-          (python "https://github.com/tree-sitter/tree-sitter-python")
-          (go "https://github.com/tree-sitter/tree-sitter-go")
-          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+        '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.23.5")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
+          (python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.6")
+          (go "https://github.com/tree-sitter/tree-sitter-go" "v0.23.4")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod" "v1.1.0")
           (json "https://github.com/tree-sitter/tree-sitter-json")
-          (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")))
+          (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.6.1")))
 
   (defun my/install-treesit-grammars ()
     "Install all tree-sitter grammars from treesit-language-source-alist."
