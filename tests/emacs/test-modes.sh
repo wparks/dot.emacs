@@ -1,12 +1,14 @@
 #!/bin/sh
-# tests/test-modes.sh — Verify mode activation, features, and startup time
+# tests/emacs/test-modes.sh — Verify mode activation, features, and startup time
 #
 # Usage: make test
 #        make test EMACS=/path/to/emacs
 
 set -e
 
-EMACS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+EMACS_DIR="$REPO_DIR/emacs.d"
+TEST_DIR="$REPO_DIR/tests/emacs"
 
 # Default to Emacs.app binary if it exists, then PATH emacs
 if [ -z "$EMACS" ]; then
@@ -26,10 +28,15 @@ echo "Emacs: $EMACS"
 echo "Version: $EMACS_VERSION"
 echo ""
 
+# Helper: run emacs batch with user-emacs-directory set to our emacs.d/
+emacs_batch() {
+    "$EMACS" --batch --eval "(setq user-emacs-directory \"$EMACS_DIR/\")" -l "$EMACS_DIR/init.el" "$@"
+}
+
 # --- Mode activation tests (single Emacs process) ---
 echo "Mode activation tests..."
 
-mode_results=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
+mode_results=$(emacs_batch --eval "
 (dolist (spec '((\"test.c\" c-ts-mode nil 4)
                 (\"test.cpp\" c++-ts-mode nil 4)
                 (\"test.py\" python-ts-mode nil 4)
@@ -44,7 +51,7 @@ mode_results=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
          (expect-mode (nth 1 spec))
          (expect-tabs (nth 2 spec))
          (expect-tw (nth 3 spec)))
-    (find-file (expand-file-name (concat \"tests/sample-files/\" file) \"$EMACS_DIR\"))
+    (find-file (expand-file-name (concat \"tests/emacs/sample-files/\" file) \"$REPO_DIR\"))
     (let ((mode-ok (eq major-mode expect-mode))
           (tabs-ok (eq indent-tabs-mode expect-tabs))
           (tw-ok (= tab-width expect-tw)))
@@ -72,7 +79,7 @@ FAIL=$((FAIL + fail_count))
 echo ""
 echo "Startup time (batch load of init.el):"
 start_ms=$(python3 -c 'import time; print(int(time.time()*1000))')
-"$EMACS" --batch -l "$EMACS_DIR/init.el" --eval '(kill-emacs)' 2>/dev/null
+emacs_batch --eval '(kill-emacs)' 2>/dev/null
 end_ms=$(python3 -c 'import time; print(int(time.time()*1000))')
 elapsed=$((end_ms - start_ms))
 echo "  ${elapsed}ms"
@@ -91,7 +98,7 @@ fi
 echo ""
 echo "Feature tests..."
 
-feature_results=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
+feature_results=$(emacs_batch --eval "
 (dolist (spec '((\"vertico-mode active\" (bound-and-true-p vertico-mode))
                (\"marginalia-mode active\" (bound-and-true-p marginalia-mode))
                (\"orderless in styles\" (memq 'orderless completion-styles))

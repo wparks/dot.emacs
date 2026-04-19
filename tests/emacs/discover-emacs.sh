@@ -1,5 +1,5 @@
 #!/bin/sh
-# tests/discover-emacs.sh — Find all Emacs installations and report capabilities
+# tests/emacs/discover-emacs.sh — Find all Emacs installations and report capabilities
 #
 # Usage: make discover
 #        sh tests/discover-emacs.sh

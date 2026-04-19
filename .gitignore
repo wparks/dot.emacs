@@ -1,7 +1,9 @@
-auto-save-list/
-elpa/
-*~
-server/
-tmp/
+# Emacs
+emacs.d/auto-save-list/
+emacs.d/elpa/
+emacs.d/server/
+emacs.d/tmp/
+emacs.d/tree-sitter/
 *.elc
+*~
 *.emacs.desktop*
