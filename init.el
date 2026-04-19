@@ -148,10 +148,13 @@
 
 ;; C/C++
 (if (my/treesit-available-p 'c)
-    (use-package c-ts-mode
-      :defer t
-      :config
-      (setq c-ts-mode-indent-offset 4))
+    (progn
+      (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
+      (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
+      (use-package c-ts-mode
+        :defer t
+        :config
+        (setq c-ts-mode-indent-offset 4)))
   (use-package cc-mode
     :defer t
     :config

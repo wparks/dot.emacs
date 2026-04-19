@@ -70,12 +70,12 @@ check() {
 }
 
 # file              expected-mode         tabs    tab-width
-check "test.c"      "c-mode"              "nil"   "4"
-check "test.cpp"    "c++-mode"            "nil"   "4"
-check "test.py"     "python-mode"         "nil"   "4"
-check "test.go"     "go-mode"             "t"     "4"
-check "test.json"   "js-json-mode"        "nil"   "4"
-check "test.yaml"   "yaml-mode"           "nil"   "4"
+check "test.c"      "c-ts-mode"           "nil"   "4"
+check "test.cpp"    "c++-ts-mode"         "nil"   "4"
+check "test.py"     "python-ts-mode"      "nil"   "4"
+check "test.go"     "go-ts-mode"          "t"     "4"
+check "test.json"   "json-ts-mode"        "nil"   "4"
+check "test.yaml"   "yaml-ts-mode"        "nil"   "4"
 check "test.swift"  "swift-mode"          "nil"   "4"
 check "test.zig"    "zig-mode"            "nil"   "4"
 check "test.md"     "markdown-mode"       "nil"   "4"
