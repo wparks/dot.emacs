@@ -1,0 +1,5 @@
+#!/bin/sh
+# Pre-commit hook: run make test before allowing commits.
+# Install: cp tests/pre-commit .git/hooks/pre-commit
+
+make test

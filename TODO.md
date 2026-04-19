@@ -36,6 +36,6 @@ Tracked work for this Emacs configuration. Check items off as completed.
 
 ## Infrastructure
 
-- [ ] Pre-commit hook running `make test`
+- [x] Pre-commit hook running `make test`
 - [ ] Test for tree-sitter mode activation (once grammars installed)
 - [ ] Audit README Emacs install instructions periodically
