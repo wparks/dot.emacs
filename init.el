@@ -27,6 +27,8 @@
   (tooltip-mode -1)
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
+  (add-to-list 'default-frame-alist '(width . 120))
+  (add-to-list 'default-frame-alist '(height . 50))
   )
 
 ;; Editor backups and autosaves
