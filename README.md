@@ -155,6 +155,12 @@ Check which LSP servers are installed:
 make check-lsp
 ```
 
+Install LSP servers for available toolchains (skips missing toolchains):
+
+```sh
+make install-lsp
+```
+
 Remove packages, grammars, caches for fresh start:
 
 ```sh
@@ -169,18 +175,18 @@ make test EMACS=/path/to/emacs
 
 ## Structure
 
-| Path                   | Purpose                                                                       |
-| ---------------------- | ----------------------------------------------------------------------------- |
-| `emacs.d/init.el`      | Main Emacs configuration                                                      |
-| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                              |
-| `docs/PRINCIPLES.md`   | Design philosophy and direction                                               |
-| `tests/emacs/`         | Emacs test scripts and sample files                                           |
-| `setup.sh`             | Symlink setup (macOS / Linux)                                                 |
-| `setup.ps1`            | Symlink setup (Windows)                                                       |
-| `Makefile`             | lint, check, test, verify, discover, setup, grammars, lsp, install-mac, clean |
-| `TODO.md`              | Tracked work and future plans                                                 |
-| `emacs.d/elpa/`        | Installed packages (gitignored)                                               |
-| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                                |
+| Path                   | Purpose                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| `emacs.d/init.el`      | Main Emacs configuration                                                                         |
+| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                                                 |
+| `docs/PRINCIPLES.md`   | Design philosophy and direction                                                                  |
+| `tests/emacs/`         | Emacs test scripts and sample files                                                              |
+| `setup.sh`             | Symlink setup (macOS / Linux)                                                                    |
+| `setup.ps1`            | Symlink setup (Windows)                                                                          |
+| `Makefile`             | lint, check, test, verify, discover, setup, grammars, check-lsp, install-lsp, install-mac, clean |
+| `TODO.md`              | Tracked work and future plans                                                                    |
+| `emacs.d/elpa/`        | Installed packages (gitignored)                                                                  |
+| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                                                   |
 
 ## License
 

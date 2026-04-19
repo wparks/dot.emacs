@@ -12,19 +12,19 @@ See [TODO.md](TODO.md) for planned work.
 
 ## Architecture
 
-| Path                   | Purpose                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| `emacs.d/init.el`      | Main Emacs configuration                                                            |
-| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                                    |
-| `docs/PRINCIPLES.md`   | Design philosophy, language roadmap, portability goals                              |
-| `TODO.md`              | Tracked work and future plans                                                       |
-| `Makefile`             | lint, check, test, verify, discover, setup, grammars, check-lsp, install-mac, clean |
-| `tests/emacs/`         | Emacs test scripts, discovery, sample files                                         |
-| `setup.sh`             | Symlink setup (macOS / Linux)                                                       |
-| `setup.ps1`            | Symlink setup (Windows)                                                             |
-| `emacs.d/elpa/`        | Installed packages (gitignored)                                                     |
-| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                                      |
-| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                                                 |
+| Path                   | Purpose                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| `emacs.d/init.el`      | Main Emacs configuration                                                                         |
+| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                                                 |
+| `docs/PRINCIPLES.md`   | Design philosophy, language roadmap, portability goals                                           |
+| `TODO.md`              | Tracked work and future plans                                                                    |
+| `Makefile`             | lint, check, test, verify, discover, setup, grammars, check-lsp, install-lsp, install-mac, clean |
+| `tests/emacs/`         | Emacs test scripts, discovery, sample files                                                      |
+| `setup.sh`             | Symlink setup (macOS / Linux)                                                                    |
+| `setup.ps1`            | Symlink setup (Windows)                                                                          |
+| `emacs.d/elpa/`        | Installed packages (gitignored)                                                                  |
+| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                                                   |
+| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                                                              |
 
 ## init.el Structure
 
@@ -65,6 +65,7 @@ make discover    # find all Emacs installations and report capabilities
 make setup       # headless package install (may fail behind corporate proxy)
 make grammars    # install tree-sitter grammars
 make check-lsp   # check which LSP servers are installed
+make install-lsp # install LSP servers for available toolchains
 make install-mac # install Emacs via brew (emacs-app cask)
 make clean       # remove elpa/, tree-sitter/, tmp/ for fresh start
 ```

@@ -1,4 +1,4 @@
-.PHONY: lint check clean grammars setup test discover verify install-mac check-lsp
+.PHONY: lint check clean grammars setup test discover verify install-mac check-lsp install-lsp
 
 EMACS_D = emacs.d
 
@@ -60,3 +60,7 @@ install-mac:
 # Check which LSP servers are installed for eglot
 check-lsp:
 	@sh tests/emacs/check-lsp-servers.sh
+
+# Install LSP servers for available toolchains
+install-lsp:
+	@sh tests/emacs/install-lsp-servers.sh

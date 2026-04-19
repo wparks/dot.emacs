@@ -1,7 +1,7 @@
 #!/bin/sh
 # tests/emacs/check-lsp-servers.sh — Check which LSP servers are installed
 #
-# Usage: make lsp
+# Usage: make check-lsp
 
 PASS=0
 MISSING=0
@@ -50,3 +50,8 @@ check_server "zls"             "Zig"     "see https://github.com/zigtools/zls" \
 
 echo ""
 echo "Results: $PASS found, $MISSING missing"
+
+if [ "$MISSING" -gt 0 ]; then
+    echo ""
+    echo "Run 'make install-lsp' to install servers for available toolchains."
+fi
