@@ -8,11 +8,11 @@ Tracked work for this Emacs configuration.
 
 ## Language Support — Phase 2: Navigation
 
-- [ ] Jump to definition / references for C/C++ (clangd)
-- [ ] Jump to definition / references for Python (pyright or pylsp)
-- [ ] Jump to definition / references for Go (gopls)
-- [ ] Jump to definition / references for Swift (sourcekit-lsp)
-- [ ] Jump to definition / references for Zig (zls)
+Eglot LSP is configured in init.el and auto-attaches to C/C++, Python, Go, Swift, Zig.
+`make install-lsp` installs servers, `make check-lsp` shows status.
+
+- [ ] Verify jump-to-definition works end-to-end per language
+- [ ] Evaluate whether JSON/YAML LSP is worth adding (vscode-json-languageserver, yaml-language-server)
 
 ## Language Support — Phase 3: Debugging
 
@@ -29,4 +29,4 @@ Tracked work for this Emacs configuration.
 
 ## Infrastructure
 
-- [ ] Audit README Emacs install instructions periodically
+- [ ] CI for `make verify` (GitHub Actions or similar)

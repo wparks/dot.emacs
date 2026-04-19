@@ -61,8 +61,6 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 | ---------- | -------------------------- |
 | `emacs.d/` | Emacs (init.el, custom.el) |
 
-More configs (git, zsh, etc.) can be added alongside `emacs.d/`.
-
 ## Emacs
 
 See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy.
@@ -112,8 +110,9 @@ If older, build from source with `--with-native-compilation --with-tree-sitter`.
 
 ### Language Support
 
-Configured with tree-sitter (when grammars installed) and traditional fallbacks:
-C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp
+C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Org, Emacs Lisp
+
+Tree-sitter modes used where available (C/C++, Python, Go, JSON, YAML). Others use dedicated packages or built-in modes.
 
 ## Verification
 
@@ -187,6 +186,7 @@ make test EMACS=/path/to/emacs
 | `TODO.md`              | Tracked work and future plans                                                                    |
 | `emacs.d/elpa/`        | Installed packages (gitignored)                                                                  |
 | `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                                                   |
+| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                                                              |
 
 ## License
 

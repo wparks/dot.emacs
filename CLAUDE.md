@@ -31,18 +31,22 @@ See [TODO.md](TODO.md) for planned work.
 1. Package system setup (MELPA/GNU ELPA, use-package bootstrap)
 2. Custom file loading
 3. Window system config (GUI: no toolbar, no scrollbar, no splash, 120x50 default)
-4. Backup/autosave system (tmp/ directory)
-5. Basic editor settings (4-space soft tabs, no real tabs, visible bell)
+4. Backup/autosave system (tmp/ directory), native-comp warning suppression
+5. Basic editor settings (4-space soft tabs, visible bell, hl-line)
 6. Theme (modus-vivendi, built-in)
 7. Whitespace visualization
 8. Completion (vertico, orderless, marginalia, corfu, savehist)
-9. Tree-sitter support (helper, grammar sources, install command)
-10. Language modes with tree-sitter / traditional fallback
+9. Which-key (keybinding discovery, Emacs 30+)
+10. Org mode
+11. Eglot LSP (auto-attaches to C/C++, Python, Go, Swift, Zig)
+12. Tree-sitter support (helper, grammar sources, install command)
+13. Language modes with tree-sitter / traditional fallback
 
 ## Active Languages
 
-All configured with tree-sitter mode (when grammar installed) and traditional fallback:
-C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp.
+Tree-sitter + traditional fallback: C/C++, Python, Go, JSON, YAML.
+External packages: Swift (swift-mode), Zig (zig-mode), Markdown (markdown-mode).
+Built-in: Emacs Lisp, Org.
 
 ## Key Design Constraints
 

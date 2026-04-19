@@ -29,7 +29,7 @@ It is the canonical reference for design decisions.
 
 ## Language Support
 
-Active languages, in rough order of use: C/C++, Python, Swift, Go, Zig, JSON, YAML, Markdown.
+Active languages, in rough order of use: C/C++, Python, Swift, Go, Zig, JSON, YAML, Markdown, Org, Emacs Lisp.
 
 Support is added in three phases:
 1. **Syntax and style** — highlighting, formatting, coloring. Consistent across modes.
@@ -58,8 +58,4 @@ Emacs is used for all text, not just code. Plain text and Markdown should have g
 
 ## Lint and Verification
 
-- `make lint` byte-compiles `init.el` to catch common errors
-- `make test` verifies mode activation and indentation settings for all configured languages
-- `make setup` installs packages headlessly (may fail behind corporate proxy)
-- `make clean` removes all generated state for a fresh start
-- Byte-compilation does not catch all issues (notably `setq-default` with misspelled variables) — know the limits
+Byte-compilation catches common errors but has limits — `setq-default` with misspelled variables is valid Elisp and passes silently. See `Makefile` for available targets.
