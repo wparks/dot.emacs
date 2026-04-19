@@ -25,7 +25,6 @@ Tracked work for this Emacs configuration.
 ## Packages to Evaluate
 
 - [ ] magit — git integration
-- [ ] org-mode — basic org config
 - [ ] highlight-indent-guides — indentation visualization
 
 ## Infrastructure

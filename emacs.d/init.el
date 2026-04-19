@@ -134,6 +134,17 @@
   :init
   (which-key-mode))
 
+;; Org mode
+(use-package org
+  :defer t
+  :mode ("\\.org\\'" . org-mode)
+  :hook (org-mode . (lambda () (setq tab-width 4)))
+  :custom
+  (org-startup-indented t)
+  (org-startup-folded 'content)
+  (org-hide-emphasis-markers t)
+  (org-return-follows-link t))
+
 ;; Programming modes
 (use-package prog-mode
   :hook (prog-mode . show-paren-mode)
