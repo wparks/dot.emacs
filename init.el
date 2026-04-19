@@ -107,6 +107,8 @@
 ;; Completion
 (use-package vertico
   :ensure t
+  :bind (:map vertico-map
+         ("TAB" . minibuffer-complete))
   :init
   (vertico-mode))
 
