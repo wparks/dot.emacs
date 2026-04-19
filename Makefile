@@ -1,4 +1,4 @@
-.PHONY: lint check clean grammars setup test
+.PHONY: lint check clean grammars setup test discover
 
 # Byte-compile init.el to catch common errors.
 # Catches: missing requires, bad function calls, setq of free variables.
@@ -43,3 +43,7 @@ setup:
 # Override Emacs binary: make test EMACS=/path/to/emacs
 test:
 	@sh tests/test-modes.sh
+
+# Find all Emacs installations and report their capabilities
+discover:
+	@sh tests/discover-emacs.sh

@@ -134,6 +134,16 @@ make grammars  # install tree-sitter grammars
 emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-available-p) (treesit-available-p))'
 ```
 
+Tests default to `/Applications/Emacs.app` on macOS (matching Spotlight launches). To test against a different Emacs binary:
+
+```sh
+make test EMACS=/usr/bin/emacs          # system Emacs (if it exists)
+make test EMACS=/opt/homebrew/bin/emacs  # Homebrew CLI
+make test EMACS=/usr/local/bin/emacs     # custom build
+```
+
+This is useful for verifying graceful fallback on older Emacs versions or on other machines.
+
 ## Structure
 
 | File / Dir           | Purpose                                          |
