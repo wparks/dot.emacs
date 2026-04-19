@@ -48,7 +48,6 @@ Emacs is used for all text, not just code. Plain text and Markdown should have g
 - All dependencies declared in `init.el` via `use-package` with `:ensure t`
 - No hardcoded paths
 - README documents how to get the right Emacs build on each platform
-- Future: migrate to a dotfiles repo structure with setup scripts for symlinking
 
 ## Package Management
 

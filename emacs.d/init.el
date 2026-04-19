@@ -62,13 +62,6 @@
 ;; Theme
 ;; modus-vivendi: built-in dark theme (Emacs 28+)
 (load-theme 'modus-vivendi t)
-;; Alternative: spacemacs-dark (uncomment to switch)
-;(use-package spacemacs-theme
-;  :ensure t
-;  :defer t
-;  :init
-;  (load-theme 'spacemacs-dark t)
-;  )
 ;; Line numbers
 (use-package display-line-numbers
   :hook (prog-mode . display-line-numbers-mode)

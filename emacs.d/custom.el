@@ -23,7 +23,7 @@
      ("FIXME" . "#dc752f")
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
- '(package-selected-packages '(use-package spacemacs-theme))
+ '(package-selected-packages '(use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(whitespace-display-mappings
    '((space-mark 32
