@@ -24,7 +24,7 @@ It is the canonical reference for design decisions.
 ## Indentation
 
 - 4-space soft tabs everywhere
-- No real tab characters, ever (`indent-tabs-mode nil`)
+- No real tab characters (`indent-tabs-mode nil`). Exception: Go uses real tabs per community convention.
 - Must hold consistently at all indentation depths and in all modes
 
 ## Language Support
@@ -60,4 +60,7 @@ Emacs is used for all text, not just code. Plain text and Markdown should have g
 ## Lint and Verification
 
 - `make lint` byte-compiles `init.el` to catch common errors
+- `make test` verifies mode activation and indentation settings for all configured languages
+- `make setup` installs packages headlessly (may fail behind corporate proxy)
+- `make clean` removes all generated state for a fresh start
 - Byte-compilation does not catch all issues (notably `setq-default` with misspelled variables) — know the limits

@@ -92,10 +92,10 @@ emacs  # packages install automatically on first launch
 
 ```sh
 git clone <repo-url> ~/.emacs.d
-emacs
+make setup    # headless package install (or just launch emacs)
+make grammars # optional: install tree-sitter grammars
+make test     # verify everything works
 ```
-
-First launch will download and compile packages — subsequent launches are fast.
 
 ### Tree-sitter grammars (optional, recommended)
 
@@ -129,6 +129,7 @@ After setup, confirm your Emacs has the features you want:
 
 ```sh
 make check     # byte-compile lint
+make test      # verify mode activation and indentation
 make grammars  # install tree-sitter grammars
 emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-available-p) (treesit-available-p))'
 ```
@@ -140,8 +141,11 @@ emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-av
 | `init.el`            | Main configuration                               |
 | `custom.el`          | Emacs-generated customization (do not hand-edit) |
 | `docs/PRINCIPLES.md` | Design philosophy and direction                  |
-| `Makefile`           | Lint and verification targets                    |
+| `TODO.md`            | Tracked work and future plans                    |
+| `Makefile`           | lint, check, test, setup, grammars, clean        |
+| `tests/`             | Test script and sample files for verification    |
 | `elpa/`              | Installed packages (gitignored)                  |
+| `tree-sitter/`       | Compiled grammars (gitignored)                   |
 | `tmp/`               | Backups and auto-saves (gitignored)              |
 
 ## Current Language Support
