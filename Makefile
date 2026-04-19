@@ -1,4 +1,4 @@
-.PHONY: lint check clean grammars
+.PHONY: lint check clean grammars setup
 
 # Byte-compile init.el to catch common errors.
 # Catches: missing requires, bad function calls, setq of free variables.
@@ -28,3 +28,13 @@ grammars:
 	@echo "Installing tree-sitter grammars..."
 	@emacs --batch -l init.el --eval '(my/install-treesit-grammars)' 2>&1
 	@echo "Done."
+
+# Headless install: refresh package index, load init to trigger use-package installs.
+# Note: may fail on corporate networks where batch mode can't reach MELPA through
+# the proxy. In that case, launch Emacs normally to install packages.
+setup:
+	@echo "Refreshing package index..."
+	@emacs --batch --eval '(progn (require (quote package)) (setq package-archives (quote (("melpa" . "https://melpa.org/packages/") ("gnu" . "https://elpa.gnu.org/packages/")))) (package-initialize) (package-refresh-contents))' 2>&1
+	@echo "Installing packages..."
+	@emacs --batch -l init.el 2>&1
+	@echo "Done. All packages installed."

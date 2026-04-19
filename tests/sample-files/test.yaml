@@ -1,0 +1,23 @@
+# test.yaml — Verify: yaml-mode or yaml-ts-mode, 2-space indent (yaml convention)
+project:
+  name: dot-emacs
+  description: Personal Emacs configuration
+  languages:
+    - c
+    - python
+    - go
+    - swift
+    - zig
+
+settings:
+  editor:
+    tab_size: 4
+    insert_spaces: true
+  theme:
+    name: spacemacs-dark
+    variant: dark
+
+nested:
+  level1:
+    level2:
+      level3: value

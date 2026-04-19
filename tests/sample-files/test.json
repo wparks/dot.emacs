@@ -1,0 +1,23 @@
+{
+    "name": "test-config",
+    "version": "1.0.0",
+    "description": "Verify: json-mode or json-ts-mode, 4-space indent",
+    "settings": {
+        "editor": {
+            "tabSize": 4,
+            "insertSpaces": true
+        },
+        "languages": [
+            "c",
+            "python",
+            "go",
+            "swift",
+            "zig"
+        ]
+    },
+    "nested": {
+        "deep": {
+            "value": true
+        }
+    }
+}
