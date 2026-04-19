@@ -39,6 +39,7 @@ setup:
 	@emacs --batch -l init.el 2>&1
 	@echo "Done. All packages installed."
 
-# Verify mode activation and indentation for all configured languages
+# Verify mode activation and indentation for all configured languages.
+# Override Emacs binary: make test EMACS=/path/to/emacs
 test:
 	@sh tests/test-modes.sh
