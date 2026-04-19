@@ -41,6 +41,11 @@
         auto-save-list-file-prefix (concat auto-saves-dir ".saves-")
         tramp-backup-directory-alist `((".*" . ,backup-dir))
         tramp-auto-save-directory auto-saves-dir))
+;; Native compilation — suppress warning popups from third-party packages,
+;; but still show errors. Warnings remain in *Messages*.
+(when (boundp 'native-comp-async-report-warnings-errors)
+  (setq native-comp-async-report-warnings-errors 'silent))
+
 ;; Basic settings and backups
 (setq
  backup-by-copying t ;; Don't delink hardlinks
