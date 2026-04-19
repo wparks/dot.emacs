@@ -35,6 +35,9 @@ git clone git@github.com:wparks/dotfiles.git $env:USERPROFILE\dotfiles
 
 ```powershell
 cd $env:USERPROFILE\dotfiles
+```
+
+```powershell
 powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
@@ -55,13 +58,16 @@ See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy.
 #### macOS
 
 ```sh
-brew install --cask emacs-app
+make install-mac
 ```
 
-Emacs 30.x with tree-sitter. For native compilation, try `emacs-plus`:
+Installs Emacs 30.x via `emacs-app` (pre-built, tree-sitter included). For native compilation, try `emacs-plus`:
 
 ```sh
 brew tap d12frosted/emacs-plus
+```
+
+```sh
 brew install emacs-plus@30
 ```
 
@@ -94,12 +100,41 @@ C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp
 ## Verification
 
 ```sh
-make discover  # find all Emacs installations and their capabilities
-make check     # byte-compile lint
-make test      # verify mode activation and indentation
-make grammars  # install tree-sitter grammars
-make clean     # remove packages, grammars, caches for fresh start
+make verify
 ```
+
+Runs lint (`check`) and mode/indentation tests (`test`) in one shot.
+
+Individual targets:
+
+```sh
+make discover
+```
+
+```sh
+make check
+```
+
+```sh
+make test
+```
+
+```sh
+make grammars
+```
+
+```sh
+make clean
+```
+
+| Target     | What it does                                        |
+| ---------- | --------------------------------------------------- |
+| `discover` | Find all Emacs installations and their capabilities |
+| `check`    | Byte-compile lint + paren check                     |
+| `test`     | Verify mode activation and indentation              |
+| `verify`   | Run `check` + `test`                                |
+| `grammars` | Install tree-sitter grammars                        |
+| `clean`    | Remove packages, grammars, caches for fresh start   |
 
 Test against a specific Emacs binary:
 
@@ -109,18 +144,18 @@ make test EMACS=/path/to/emacs
 
 ## Structure
 
-| Path                   | Purpose                                          |
-| ---------------------- | ------------------------------------------------ |
-| `emacs.d/init.el`      | Main Emacs configuration                         |
-| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit) |
-| `docs/PRINCIPLES.md`   | Design philosophy and direction                  |
-| `tests/emacs/`         | Emacs test scripts and sample files              |
-| `setup.sh`             | Symlink setup (macOS / Linux)                    |
-| `setup.ps1`            | Symlink setup (Windows)                          |
-| `Makefile`             | lint, check, test, discover, setup, grammars     |
-| `TODO.md`              | Tracked work and future plans                    |
-| `emacs.d/elpa/`        | Installed packages (gitignored)                  |
-| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                   |
+| Path                   | Purpose                                                                  |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `emacs.d/init.el`      | Main Emacs configuration                                                 |
+| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                         |
+| `docs/PRINCIPLES.md`   | Design philosophy and direction                                          |
+| `tests/emacs/`         | Emacs test scripts and sample files                                      |
+| `setup.sh`             | Symlink setup (macOS / Linux)                                            |
+| `setup.ps1`            | Symlink setup (Windows)                                                  |
+| `Makefile`             | lint, check, test, verify, discover, setup, grammars, install-mac, clean |
+| `TODO.md`              | Tracked work and future plans                                            |
+| `emacs.d/elpa/`        | Installed packages (gitignored)                                          |
+| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                           |
 
 ## License
 

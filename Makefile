@@ -1,4 +1,4 @@
-.PHONY: lint check clean grammars setup test discover
+.PHONY: lint check clean grammars setup test discover verify install-mac
 
 EMACS_D = emacs.d
 
@@ -49,3 +49,10 @@ test:
 # Find all Emacs installations and report their capabilities
 discover:
 	@sh tests/emacs/discover-emacs.sh
+
+# Run all verification: lint + tests
+verify: check test
+
+# Install Emacs on macOS (recommended: emacs-app cask)
+install-mac:
+	brew install --cask emacs-app

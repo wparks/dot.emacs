@@ -12,19 +12,19 @@ See [TODO.md](TODO.md) for planned work.
 
 ## Architecture
 
-| Path                   | Purpose                                                |
-| ---------------------- | ------------------------------------------------------ |
-| `emacs.d/init.el`      | Main Emacs configuration                               |
-| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)       |
-| `docs/PRINCIPLES.md`   | Design philosophy, language roadmap, portability goals |
-| `TODO.md`              | Tracked work and future plans                          |
-| `Makefile`             | lint, check, test, discover, setup, grammars, clean    |
-| `tests/emacs/`         | Emacs test scripts, discovery, sample files            |
-| `setup.sh`             | Symlink setup (macOS / Linux)                          |
-| `setup.ps1`            | Symlink setup (Windows)                                |
-| `emacs.d/elpa/`        | Installed packages (gitignored)                        |
-| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                         |
-| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                    |
+| Path                   | Purpose                                                                  |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `emacs.d/init.el`      | Main Emacs configuration                                                 |
+| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                         |
+| `docs/PRINCIPLES.md`   | Design philosophy, language roadmap, portability goals                   |
+| `TODO.md`              | Tracked work and future plans                                            |
+| `Makefile`             | lint, check, test, verify, discover, setup, grammars, install-mac, clean |
+| `tests/emacs/`         | Emacs test scripts, discovery, sample files                              |
+| `setup.sh`             | Symlink setup (macOS / Linux)                                            |
+| `setup.ps1`            | Symlink setup (Windows)                                                  |
+| `emacs.d/elpa/`        | Installed packages (gitignored)                                          |
+| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                           |
+| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                                      |
 
 ## init.el Structure
 
@@ -57,13 +57,15 @@ C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp.
 ## Verification
 
 ```sh
-make lint      # byte-compile init.el
-make check     # lint + paren check
-make test      # verify mode activation and indentation for all languages
-make discover  # find all Emacs installations and report capabilities
-make setup     # headless package install (may fail behind corporate proxy)
-make grammars  # install tree-sitter grammars
-make clean     # remove elpa/, tree-sitter/, tmp/ for fresh start
+make lint        # byte-compile init.el
+make check       # lint + paren check
+make test        # verify mode activation and indentation for all languages
+make verify      # check + test in one shot
+make discover    # find all Emacs installations and report capabilities
+make setup       # headless package install (may fail behind corporate proxy)
+make grammars    # install tree-sitter grammars
+make install-mac # install Emacs via brew (emacs-app cask)
+make clean       # remove elpa/, tree-sitter/, tmp/ for fresh start
 ```
 
 ## Emacs Usage
