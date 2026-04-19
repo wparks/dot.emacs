@@ -6,16 +6,34 @@ Personal dotfiles. Minimal, portable, built-in-first.
 
 ```sh
 git clone git@github.com:wparks/dotfiles.git ~/dotfiles
+```
+
+```sh
 cd ~/dotfiles
-./setup.sh          # creates ~/.emacs.d symlink
-emacs               # installs packages on first launch
-make grammars       # optional: tree-sitter grammars
-make test           # verify everything works
+./setup.sh
+```
+
+```sh
+emacs
+```
+
+Then optionally:
+
+```sh
+make grammars
+```
+
+```sh
+make test
 ```
 
 **Windows:**
+
 ```powershell
 git clone git@github.com:wparks/dotfiles.git $env:USERPROFILE\dotfiles
+```
+
+```powershell
 cd $env:USERPROFILE\dotfiles
 powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
