@@ -10,20 +10,26 @@ Emacs 29+ with tree-sitter support. Native compilation recommended for performan
 
 ## Installing Emacs
 
-### macOS (recommended: emacs-plus)
+### macOS
+
+```sh
+brew install --cask emacs-app
+```
+
+This provides Emacs 30.x with tree-sitter support. For native compilation, try `emacs-plus`:
 
 ```sh
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@30
 ```
 
-Native compilation and tree-sitter are included by default.
+**Note:** emacs-plus may fail to build on the latest macOS (Tahoe). If it does, `emacs-app` works fine — native-comp is a performance optimization, not required.
 
 **Alternatives:**
 | Option                                    | Native-comp | Tree-sitter | Notes                                                        |
 | ----------------------------------------- | ----------- | ----------- | ------------------------------------------------------------ |
-| `brew install --cask emacs-app`           | No          | Yes         | Simple install but missing native-comp                       |
-| `brew install --cask emacs`               | No          | Varies      | Official GNU build                                           |
+| `brew install --cask emacs-app`           | No          | Yes         | Reliable, pre-built binary                                   |
+| `brew install emacs-plus@30`              | Yes         | Yes         | Best option when it builds; may fail on new macOS            |
 | `brew install emacs-mac` (railwaycat tap) | Varies      | Yes         | Mitsuharu Yamamoto's macOS-native port; good Mac integration |
 | emacsformacosx.com                        | No          | No          | Simple binary download; lacks modern features                |
 
