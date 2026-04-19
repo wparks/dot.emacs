@@ -4,24 +4,32 @@ Personal dotfiles. Minimal, portable, built-in-first.
 
 ## Quick Start
 
+Clone the repo:
+
 ```sh
 git clone git@github.com:wparks/dotfiles.git ~/dotfiles
 ```
+
+Set up symlinks:
 
 ```sh
 cd ~/dotfiles
 ./setup.sh
 ```
 
+Launch Emacs to install packages on first run:
+
 ```sh
 emacs
 ```
 
-Then optionally:
+Then optionally, install tree-sitter grammars:
 
 ```sh
 make grammars
 ```
+
+Verify everything works:
 
 ```sh
 make test
@@ -29,13 +37,19 @@ make test
 
 **Windows:**
 
+Clone the repo:
+
 ```powershell
 git clone git@github.com:wparks/dotfiles.git $env:USERPROFILE\dotfiles
 ```
 
+Change to the repo directory:
+
 ```powershell
 cd $env:USERPROFILE\dotfiles
 ```
+
+Set up symlinks (requires Developer Mode):
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File setup.ps1
@@ -56,6 +70,8 @@ See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for design philosophy.
 ### Installing Emacs
 
 #### macOS
+
+Recommended install:
 
 ```sh
 make install-mac
@@ -86,8 +102,10 @@ Download from https://ftp.gnu.org/gnu/emacs/windows/ — Emacs 29+ builds includ
 
 #### Linux
 
+Check your version (need 29+):
+
 ```sh
-emacs --version  # check if 29+
+emacs --version
 ```
 
 If older, build from source with `--with-native-compilation --with-tree-sitter`.
