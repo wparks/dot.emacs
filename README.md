@@ -107,34 +107,35 @@ Runs lint (`check`) and mode/indentation tests (`test`) in one shot.
 
 Individual targets:
 
+Find all Emacs installations and their capabilities:
+
 ```sh
 make discover
 ```
+
+Byte-compile lint + paren check:
 
 ```sh
 make check
 ```
 
+Verify mode activation and indentation:
+
 ```sh
 make test
 ```
+
+Install tree-sitter grammars:
 
 ```sh
 make grammars
 ```
 
+Remove packages, grammars, caches for fresh start:
+
 ```sh
 make clean
 ```
-
-| Target     | What it does                                        |
-| ---------- | --------------------------------------------------- |
-| `discover` | Find all Emacs installations and their capabilities |
-| `check`    | Byte-compile lint + paren check                     |
-| `test`     | Verify mode activation and indentation              |
-| `verify`   | Run `check` + `test`                                |
-| `grammars` | Install tree-sitter grammars                        |
-| `clean`    | Remove packages, grammars, caches for fresh start   |
 
 Test against a specific Emacs binary:
 
