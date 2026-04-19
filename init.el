@@ -158,12 +158,14 @@
       :defer t
       :mode ("\\.py\\'" . python-ts-mode)
       :config
-      (setq python-indent-offset 4))
+      (setq python-indent-offset 4)
+      :hook (python-ts-mode . (lambda () (setq tab-width 4))))
   (use-package python
     :defer t
     :mode ("\\.py\\'" . python-mode)
     :config
-    (setq python-indent-offset 4)))
+    (setq python-indent-offset 4)
+    :hook (python-mode . (lambda () (setq tab-width 4)))))
 
 ;; Go — uses real tabs per community convention
 (if (my/treesit-available-p 'go)

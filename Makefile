@@ -1,4 +1,4 @@
-.PHONY: lint check clean grammars setup
+.PHONY: lint check clean grammars setup test
 
 # Byte-compile init.el to catch common errors.
 # Catches: missing requires, bad function calls, setq of free variables.
@@ -38,3 +38,7 @@ setup:
 	@echo "Installing packages..."
 	@emacs --batch -l init.el 2>&1
 	@echo "Done. All packages installed."
+
+# Verify mode activation and indentation for all configured languages
+test:
+	@sh tests/test-modes.sh
