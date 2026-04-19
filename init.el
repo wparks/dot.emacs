@@ -55,7 +55,6 @@
  indent-tabs-mode nil
  tab-width 4
  )
-(desktop-save-mode 1)
 (global-hl-line-mode t)
 
 ;; Theme
@@ -70,7 +69,6 @@
 ;  )
 ;; Line numbers
 (use-package display-line-numbers
-  :defer t
   :hook (prog-mode . display-line-numbers-mode)
   :custom
   (display-line-numbers-grow-only t)
@@ -79,7 +77,6 @@
 
 ;; Whitespace
 (use-package whitespace
-  :defer t
   :hook
   (prog-mode . whitespace-mode)
   (text-mode . whitespace-mode)
@@ -126,18 +123,20 @@
 
 ;; Programming modes
 (use-package prog-mode
-  :defer t
   :hook (prog-mode . show-paren-mode)
   )
 
 ;; Tree-sitter support (Emacs 29+)
+(defvar my/treesit-p
+  (and (fboundp 'treesit-available-p) (treesit-available-p))
+  "Non-nil if tree-sitter is compiled into this Emacs.")
+
 (defun my/treesit-available-p (lang)
   "Check if tree-sitter is usable for LANG."
-  (and (fboundp 'treesit-available-p)
-       (treesit-available-p)
+  (and my/treesit-p
        (treesit-language-available-p lang)))
 
-(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+(when my/treesit-p
   ;; Grammar sources pinned to ABI 14 compatible versions (Emacs 30.x).
   ;; JSON works at latest. Others need pre-0.25 tree-sitter tags.
   (setq treesit-language-source-alist
@@ -158,11 +157,7 @@
 
 ;; Emacs Lisp mode
 (use-package elisp-mode
-  :defer t
-  :mode ("\\.el\\'" . emacs-lisp-mode)
   :hook (emacs-lisp-mode . eldoc-mode)
-  :config
-  (setq indent-tabs-mode nil)
   )
 
 ;; C/C++

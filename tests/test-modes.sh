@@ -1,11 +1,8 @@
 #!/bin/sh
-# tests/test-modes.sh — Verify mode activation and indentation settings
+# tests/test-modes.sh — Verify mode activation, features, and startup time
 #
 # Usage: make test
 #        make test EMACS=/path/to/emacs
-#
-# Tests against the same Emacs that Emacs.app uses by default.
-# Override with EMACS env var to test against a different binary.
 
 set -e
 
@@ -24,66 +21,55 @@ EMACS_VERSION=$("$EMACS" --version 2>&1 | head -1)
 PASS=0
 FAIL=0
 
-echo "Running mode activation tests..."
+echo "Running tests..."
 echo "Emacs: $EMACS"
 echo "Version: $EMACS_VERSION"
 echo ""
 
-check() {
-    file="$1"
-    expect_mode="$2"
-    expect_tabs="$3"
-    expect_tw="$4"
+# --- Mode activation tests (single Emacs process) ---
+echo "Mode activation tests..."
 
-    result=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
-(progn
-  (find-file \"$EMACS_DIR/tests/sample-files/$file\")
-  (princ (format \"%s|%s|%d\" major-mode indent-tabs-mode tab-width)))" 2>/dev/null)
+mode_results=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
+(dolist (spec '((\"test.c\" c-ts-mode nil 4)
+                (\"test.cpp\" c++-ts-mode nil 4)
+                (\"test.py\" python-ts-mode nil 4)
+                (\"test.go\" go-ts-mode t 4)
+                (\"test.json\" json-ts-mode nil 4)
+                (\"test.yaml\" yaml-ts-mode nil 4)
+                (\"test.swift\" swift-mode nil 4)
+                (\"test.zig\" zig-mode nil 4)
+                (\"test.md\" markdown-mode nil 4)
+                (\"test.el\" emacs-lisp-mode nil 4)))
+  (let* ((file (nth 0 spec))
+         (expect-mode (nth 1 spec))
+         (expect-tabs (nth 2 spec))
+         (expect-tw (nth 3 spec)))
+    (find-file (expand-file-name (concat \"tests/sample-files/\" file) \"$EMACS_DIR\"))
+    (let ((mode-ok (eq major-mode expect-mode))
+          (tabs-ok (eq indent-tabs-mode expect-tabs))
+          (tw-ok (= tab-width expect-tw)))
+      (princ (format \"%s|%s|%s|%s|%s|%s|%s\n\"
+                     file
+                     (if (and mode-ok tabs-ok tw-ok) \"PASS\" \"FAIL\")
+                     major-mode expect-mode
+                     indent-tabs-mode expect-tabs tab-width)))))" 2>/dev/null)
 
-    got_mode=$(echo "$result" | cut -d'|' -f1)
-    got_tabs=$(echo "$result" | cut -d'|' -f2)
-    got_tw=$(echo "$result" | cut -d'|' -f3)
-
-    ok=true
-    errors=""
-
-    if [ "$got_mode" != "$expect_mode" ]; then
-        ok=false
-        errors="mode: got $got_mode, expected $expect_mode"
-    fi
-    if [ "$got_tabs" != "$expect_tabs" ]; then
-        ok=false
-        errors="$errors tabs: got $got_tabs, expected $expect_tabs"
-    fi
-    if [ "$got_tw" != "$expect_tw" ]; then
-        ok=false
-        errors="$errors tab-width: got $got_tw, expected $expect_tw"
-    fi
-
-    if [ "$ok" = true ]; then
+echo "$mode_results" | while IFS='|' read -r file status got_mode exp_mode got_tabs exp_tabs got_tw; do
+    if [ "$status" = "PASS" ]; then
         printf "  PASS  %-12s  %-22s  tabs:%-5s  tw:%s\n" "$file" "$got_mode" "$got_tabs" "$got_tw"
-        PASS=$((PASS + 1))
     else
-        printf "  FAIL  %-12s  %s\n" "$file" "$errors"
-        FAIL=$((FAIL + 1))
+        printf "  FAIL  %-12s  mode:%s(want %s) tabs:%s(want %s) tw:%s\n" \
+               "$file" "$got_mode" "$exp_mode" "$got_tabs" "$exp_tabs" "$got_tw"
     fi
-}
+done
 
-# file              expected-mode         tabs    tab-width
-check "test.c"      "c-ts-mode"           "nil"   "4"
-check "test.cpp"    "c++-ts-mode"         "nil"   "4"
-check "test.py"     "python-ts-mode"      "nil"   "4"
-check "test.go"     "go-ts-mode"          "t"     "4"
-check "test.json"   "json-ts-mode"        "nil"   "4"
-check "test.yaml"   "yaml-ts-mode"        "nil"   "4"
-check "test.swift"  "swift-mode"          "nil"   "4"
-check "test.zig"    "zig-mode"            "nil"   "4"
-check "test.md"     "markdown-mode"       "nil"   "4"
-check "test.el"     "emacs-lisp-mode"     "nil"   "4"
+pass_count=$(echo "$mode_results" | grep -c "PASS" || true)
+fail_count=$(echo "$mode_results" | grep -c "FAIL" || true)
+PASS=$((PASS + pass_count))
+FAIL=$((FAIL + fail_count))
 
+# --- Startup time ---
 echo ""
-
-# Startup time measurement
 echo "Startup time (batch load of init.el):"
 start_ms=$(python3 -c 'import time; print(int(time.time()*1000))')
 "$EMACS" --batch -l "$EMACS_DIR/init.el" --eval '(kill-emacs)' 2>/dev/null
@@ -94,36 +80,33 @@ if [ "$elapsed" -gt 2000 ]; then
     echo "  WARNING: startup exceeds 2s"
 fi
 
+# --- Feature activation tests (single Emacs process) ---
 echo ""
-
-# Feature activation tests
 echo "Feature tests..."
 
-check_feature() {
-    name="$1"
-    expr="$2"
+feature_results=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "
+(dolist (spec '((\"vertico-mode active\" (bound-and-true-p vertico-mode))
+               (\"marginalia-mode active\" (bound-and-true-p marginalia-mode))
+               (\"orderless in styles\" (memq 'orderless completion-styles))
+               (\"savehist-mode active\" (bound-and-true-p savehist-mode))
+               (\"show-paren-mode hook\" (memq 'show-paren-mode prog-mode-hook))
+               (\"global-hl-line-mode\" (bound-and-true-p global-hl-line-mode))
+               (\"indent-tabs-mode off\" (not (default-value 'indent-tabs-mode)))
+               (\"tab-width is 4\" (= (default-value 'tab-width) 4))
+               (\"no lockfiles\" (not create-lockfiles))
+               (\"backup-by-copying\" backup-by-copying)))
+  (let ((name (nth 0 spec))
+        (expr (nth 1 spec)))
+    (princ (format \"%s|%s\n\" (if (eval expr) \"PASS\" \"FAIL\") name))))" 2>/dev/null)
 
-    result=$("$EMACS" --batch -l "$EMACS_DIR/init.el" --eval "(princ (if $expr \"yes\" \"no\"))" 2>/dev/null)
+echo "$feature_results" | while IFS='|' read -r status name; do
+    printf "  %s  %s\n" "$status" "$name"
+done
 
-    if [ "$result" = "yes" ]; then
-        printf "  PASS  %s\n" "$name"
-        PASS=$((PASS + 1))
-    else
-        printf "  FAIL  %s\n" "$name"
-        FAIL=$((FAIL + 1))
-    fi
-}
-
-check_feature "vertico-mode active"        "(bound-and-true-p vertico-mode)"
-check_feature "marginalia-mode active"     "(bound-and-true-p marginalia-mode)"
-check_feature "orderless in styles"        "(memq 'orderless completion-styles)"
-check_feature "savehist-mode active"       "(bound-and-true-p savehist-mode)"
-check_feature "show-paren-mode hook"       "(memq 'show-paren-mode prog-mode-hook)"
-check_feature "global-hl-line-mode"        "(bound-and-true-p global-hl-line-mode)"
-check_feature "indent-tabs-mode off"       "(not (default-value 'indent-tabs-mode))"
-check_feature "tab-width is 4"            "(= (default-value 'tab-width) 4)"
-check_feature "no lockfiles"              "(not create-lockfiles)"
-check_feature "backup-by-copying"         "backup-by-copying"
+feat_pass=$(echo "$feature_results" | grep -c "PASS" || true)
+feat_fail=$(echo "$feature_results" | grep -c "FAIL" || true)
+PASS=$((PASS + feat_pass))
+FAIL=$((FAIL + feat_fail))
 
 echo ""
 echo "Results: $PASS passed, $FAIL failed"
