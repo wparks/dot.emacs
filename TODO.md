@@ -8,7 +8,6 @@ Tracked work for this Emacs configuration.
 
 ## Language Support — Phase 2: Navigation
 
-- [ ] Add eglot (built-in LSP client, Emacs 29+) with per-language server config
 - [ ] Jump to definition / references for C/C++ (clangd)
 - [ ] Jump to definition / references for Python (pyright or pylsp)
 - [ ] Jump to definition / references for Go (gopls)
@@ -26,6 +25,7 @@ Tracked work for this Emacs configuration.
 
 - [ ] magit — git integration
 - [ ] highlight-indent-guides — indentation visualization
+- [ ] bash-ts-mode — tree-sitter shell highlighting
 
 ## Infrastructure
 

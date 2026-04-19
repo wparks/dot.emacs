@@ -106,6 +106,7 @@ feature_results=$(emacs_batch --eval "
                (\"corfu-mode active\" (bound-and-true-p global-corfu-mode))
                (\"savehist-mode active\" (bound-and-true-p savehist-mode))
                (\"which-key-mode active\" (bound-and-true-p which-key-mode))
+               (\"eglot available\" (fboundp 'eglot-ensure))
                (\"show-paren-mode hook\" (memq 'show-paren-mode prog-mode-hook))
                (\"global-hl-line-mode\" (bound-and-true-p global-hl-line-mode))
                (\"indent-tabs-mode off\" (not (default-value 'indent-tabs-mode)))

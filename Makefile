@@ -1,4 +1,4 @@
-.PHONY: lint check clean grammars setup test discover verify install-mac
+.PHONY: lint check clean grammars setup test discover verify install-mac check-lsp
 
 EMACS_D = emacs.d
 
@@ -56,3 +56,7 @@ verify: check test
 # Install Emacs on macOS (recommended: emacs-app cask)
 install-mac:
 	brew install --cask emacs-app
+
+# Check which LSP servers are installed for eglot
+check-lsp:
+	@sh tests/emacs/check-lsp-servers.sh

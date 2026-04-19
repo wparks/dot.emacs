@@ -150,6 +150,17 @@
   (org-hide-emphasis-markers t)
   (org-return-follows-link t))
 
+;; LSP support (built-in Emacs 29+)
+(use-package eglot
+  :if (fboundp 'eglot-ensure)
+  :hook ((c-mode c-ts-mode c++-mode c++-ts-mode) . eglot-ensure)
+        ((python-mode python-ts-mode) . eglot-ensure)
+        ((go-mode go-ts-mode) . eglot-ensure)
+        (swift-mode . eglot-ensure)
+        (zig-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '(swift-mode . ("sourcekit-lsp"))))
+
 ;; Programming modes
 (use-package prog-mode
   :hook (prog-mode . show-paren-mode)
