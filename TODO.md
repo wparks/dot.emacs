@@ -5,7 +5,7 @@ Tracked work for this Emacs configuration. Check items off as completed.
 ## Active
 
 - [x] Install tree-sitter grammars (`make grammars`) and update test expectations
-- [ ] Investigate emacs-plus build failure on macOS Tahoe (Abort trap: 6 during pdmp)
+- [ ] Investigate emacs-plus build failure on macOS Tahoe (Abort trap: 6 during pdmp — upstream issue, try `--HEAD` or check back periodically)
 - [ ] Dotfiles repo restructure — move to `dotfiles/emacs.d/` with `setup.sh` + `setup.ps1`
 - [x] Remove stale `rust-mode` and `jinx` from elpa if they reappear after clean install
 
