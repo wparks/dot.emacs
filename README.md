@@ -128,10 +128,10 @@ For more complex dotfiles management, [chezmoi](https://www.chezmoi.io/) is a cr
 After setup, confirm your Emacs has the features you want:
 
 ```sh
+make discover  # find all Emacs installations and their capabilities
 make check     # byte-compile lint
 make test      # verify mode activation and indentation
 make grammars  # install tree-sitter grammars
-emacs --batch --eval '(message "native-comp: %s tree-sitter: %s" (native-comp-available-p) (treesit-available-p))'
 ```
 
 Tests default to `/Applications/Emacs.app` on macOS (matching Spotlight launches). To test against a different Emacs binary:

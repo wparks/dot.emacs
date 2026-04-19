@@ -14,7 +14,7 @@ It is the canonical reference for design decisions.
 
 ## Visual Goals
 
-- Dark theme (currently spacemacs-dark)
+- Dark theme (currently modus-vivendi, built-in)
 - Minimal UI: no toolbar, no scrollbar, no splash screen
 - Whitespace visualization: spaces, tabs, newlines rendered with Unicode marks
 - Line numbers in programming modes

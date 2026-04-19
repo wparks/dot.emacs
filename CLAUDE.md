@@ -16,8 +16,8 @@ See [TODO.md](TODO.md) for planned work.
 | `custom.el`          | Emacs-generated customization (do not hand-edit)         |
 | `docs/PRINCIPLES.md` | Design philosophy, language roadmap, portability goals   |
 | `TODO.md`            | Tracked work and future plans                            |
-| `Makefile`           | lint, check, test, setup, grammars, clean                |
-| `tests/`             | Test script and sample files for mode verification       |
+| `Makefile`           | lint, check, test, discover, setup, grammars, clean      |
+| `tests/`             | Test scripts, discovery, and sample files                |
 | `elpa/`              | Installed packages (gitignored)                          |
 | `tree-sitter/`       | Compiled grammars (gitignored)                           |
 | `tmp/`               | Backups and auto-saves (gitignored)                      |
@@ -29,7 +29,7 @@ See [TODO.md](TODO.md) for planned work.
 3. Window system config (GUI: no toolbar, no scrollbar, no splash)
 4. Backup/autosave system (tmp/ directory)
 5. Basic editor settings (4-space soft tabs, no real tabs, visible bell)
-6. Theme (spacemacs-dark)
+6. Theme (modus-vivendi, built-in)
 7. Whitespace visualization
 8. Tree-sitter support (helper, grammar sources, install command)
 9. Language modes with tree-sitter / traditional fallback
@@ -55,6 +55,7 @@ C/C++, Python, Go, JSON, YAML, Swift, Zig, Markdown, Emacs Lisp.
 make lint      # byte-compile init.el
 make check     # lint + paren check
 make test      # verify mode activation and indentation for all languages
+make discover  # find all Emacs installations and report capabilities
 make setup     # headless package install (may fail behind corporate proxy)
 make grammars  # install tree-sitter grammars
 make clean     # remove elpa/, tree-sitter/, tmp/ for fresh start
