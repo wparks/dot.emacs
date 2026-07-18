@@ -12,19 +12,22 @@ See [TODO.md](TODO.md) for planned work.
 
 ## Architecture
 
-| Path                   | Purpose                                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------ |
-| `emacs.d/init.el`      | Main Emacs configuration                                                                         |
-| `emacs.d/custom.el`    | Emacs-generated customization (do not hand-edit)                                                 |
-| `docs/PRINCIPLES.md`   | Design philosophy, language roadmap, portability goals                                           |
-| `TODO.md`              | Tracked work and future plans                                                                    |
-| `Makefile`             | lint, check, test, verify, discover, setup, grammars, check-lsp, install-lsp, install-mac, clean |
-| `tests/emacs/`         | Emacs test scripts, discovery, sample files                                                      |
-| `setup.sh`             | Symlink setup (macOS / Linux)                                                                    |
-| `setup.ps1`            | Symlink setup (Windows)                                                                          |
-| `emacs.d/elpa/`        | Installed packages (gitignored)                                                                  |
-| `emacs.d/tree-sitter/` | Compiled grammars (gitignored)                                                                   |
-| `emacs.d/tmp/`         | Backups and auto-saves (gitignored)                                                              |
+| Path                                 | Purpose                                                                                          |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `emacs.d/init.el`                    | Main Emacs configuration                                                                         |
+| `emacs.d/custom.el`                  | Emacs-generated customization (do not hand-edit)                                                 |
+| `docs/PRINCIPLES.md`                 | Design philosophy, language roadmap, portability goals                                           |
+| `docs/keyboard-word-navigation.md`   | Option+F/B word navigation across Cocoa apps and terminals                                       |
+| `TODO.md`                            | Tracked work and future plans                                                                    |
+| `Makefile`                           | lint, check, test, verify, discover, setup, grammars, check-lsp, install-lsp, install-mac, clean |
+| `tests/emacs/`                       | Emacs test scripts, discovery, sample files                                                      |
+| `setup.sh`                           | Symlink setup (macOS / Linux)                                                                    |
+| `setup.ps1`                          | Symlink setup (Windows)                                                                          |
+| `ghostty/config`                     | Ghostty terminal config (macOS only, symlinked by `setup.sh`)                                    |
+| `keybindings/DefaultKeyBinding.dict` | Cocoa emacs-style keybindings (macOS only, symlinked by `setup.sh`)                              |
+| `emacs.d/elpa/`                      | Installed packages (gitignored)                                                                  |
+| `emacs.d/tree-sitter/`               | Compiled grammars (gitignored)                                                                   |
+| `emacs.d/tmp/`                       | Backups and auto-saves (gitignored)                                                              |
 
 ## init.el Structure
 
@@ -56,7 +59,7 @@ Built-in: Emacs Lisp, Org.
 - **4-space soft tabs**: `indent-tabs-mode nil`, `tab-width 4` everywhere. Exception: Go uses real tabs.
 - **Consistent cross-language**: all programming modes should have the same visual treatment.
 - **Tree-sitter preferred** (`*-ts-mode`) where available — Emacs 29+. Falls back gracefully.
-- **Portable**: macOS, Linux, Windows. No hardcoded paths.
+- **Portable**: macOS, Linux, Windows. No hardcoded paths. macOS-only steps (Ghostty, Cocoa keybindings) are guarded in `setup.sh` and skipped on other platforms.
 
 ## Verification
 

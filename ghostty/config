@@ -1,0 +1,4 @@
+# Emacs-style word navigation (Option+F/Option+B) requires Option to act as
+# Alt/Meta. Tradeoff: this disables Option-based special-character
+# composition (e.g. Option+E for e-acute) inside Ghostty.
+macos-option-as-alt = true
