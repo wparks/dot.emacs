@@ -23,6 +23,7 @@ See [TODO.md](TODO.md) for planned work.
 | `tests/emacs/`                       | Emacs test scripts, discovery, sample files                                                      |
 | `setup.sh`                           | Symlink setup (macOS / Linux)                                                                    |
 | `setup.ps1`                          | Symlink setup (Windows)                                                                          |
+| `zsh/zshrc.shared`                   | Portable zsh config; sourced (not symlinked) by local `~/.zshrc` by design                       |
 | `ghostty/config`                     | Ghostty terminal config (macOS only, symlinked by `setup.sh`)                                    |
 | `keybindings/DefaultKeyBinding.dict` | Cocoa emacs-style keybindings (macOS only, symlinked by `setup.sh`)                              |
 | `emacs.d/elpa/`                      | Installed packages (gitignored)                                                                  |

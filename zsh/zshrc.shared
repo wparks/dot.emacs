@@ -1,0 +1,14 @@
+# Sourced (not symlinked) by ~/.zshrc — unlike everything else in this repo.
+# ~/.zshrc has content auto-appended in place by external installers; keeping
+# it a real local file and sourcing this tracked file for the portable parts
+# means those installers never write into the public repo.
+
+# meta+f/b works emacs-style in bash
+autoload -Uz select-word-style
+select-word-style bash
+
+eval "$(ssh-agent -s)"
+
+# Claude Code defaults
+alias claude='claude --effort max'
+alias cc='claude'

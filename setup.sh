@@ -68,6 +68,23 @@ else
     echo "  skipping Ghostty (not macOS)"
 fi
 
+# Zsh (shared config)
+ZSHRC_SOURCE_LINE='[[ -f ~/dotfiles/zsh/zshrc.shared ]] && source ~/dotfiles/zsh/zshrc.shared'
+
+if [ ! -e "$HOME/.zshrc" ]; then
+    echo "$ZSHRC_SOURCE_LINE" > "$HOME/.zshrc"
+    echo "  ~/.zshrc created and sources $DOTFILES_DIR/zsh/zshrc.shared"
+elif grep -qF "$ZSHRC_SOURCE_LINE" "$HOME/.zshrc"; then
+    echo "  ~/.zshrc already sources zsh/zshrc.shared"
+else
+    {
+        echo ""
+        echo "# Portable dotfiles config"
+        echo "$ZSHRC_SOURCE_LINE"
+    } >> "$HOME/.zshrc"
+    echo "  ~/.zshrc updated to source $DOTFILES_DIR/zsh/zshrc.shared"
+fi
+
 # Pre-commit hook
 if [ -d "$DOTFILES_DIR/.git/hooks" ]; then
     cp "$DOTFILES_DIR/tests/emacs/pre-commit" "$DOTFILES_DIR/.git/hooks/pre-commit"
