@@ -1,14 +1,7 @@
 # Emacs
-emacs.d/auto-save-list/
-emacs.d/elpa/
-emacs.d/history
-emacs.d/server/
-emacs.d/tmp/
-emacs.d/tree-sitter/
+emacs.d/*
+!emacs.d/init.el
+!emacs.d/custom.el
 *.elc
 *~
 *.emacs.desktop*
-
-# Stale artifacts
-elpa/
-history
