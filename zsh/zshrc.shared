@@ -6,5 +6,3 @@
 # meta+f/b works emacs-style in bash
 autoload -Uz select-word-style
 select-word-style bash
-
-alias cc='command claude'
